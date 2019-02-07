@@ -1,5 +1,5 @@
 return {
-	bot_api_key = "564676924:AAFvBaP9ceyLxu22VrvqyuSW9vRy3lPeL_A",
+	bot_api_key = "592305753:AAFG1b_9LuP5YVjKE-207Q5A7Ve-3YW-k4s",
 	allowed_updates = {"message", "edited_message", "callback_query"},
 	channel = '@canaldobananal', -- Canal de seu bot '@'
 	source_code = 'https://github.com/matheusbach/',
