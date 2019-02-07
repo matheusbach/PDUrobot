@@ -1,4 +1,4 @@
-# Moderadorbot
+# PDUrobot
 
 # Sistema operacional Ubuntu 16.04
 Preparando o sistema para rodar o bot
@@ -11,11 +11,11 @@ $ sudo apt-get upgrade
 
 $ sudo apt-get install libreadline-dev libssl-dev lua5.2 liblua5.2-dev git make unzip redis-server curl libcurl4-gnutls-dev
 
-$ git clone https://github.com/viniciusvrc/Moderadorbot
+$ git clone https://github.com/matheusbach/PDUrobot
 
 $ sudo chmod -R 755 *
 
-$ cd moderadorbot
+$ cd PDUrobot
 
 $ ./install.sh
 
