@@ -2,7 +2,7 @@ local api = require 'methods'
 local redis = require 'redis'
 local clr = require 'term.colors'
 local u, config, plugins, last_update, last_cron
-db = redis.connect('10.128.0.2', 6379)
+db = redis.connect('104.155.148.232', 6379)
 
 function bot_init(on_reload) -- The function run when the bot is started or reloaded.
 	
