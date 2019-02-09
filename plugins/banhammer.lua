@@ -191,10 +191,8 @@ function plugin.onTextMessage(msg, blocks)
 		else
 			if blocks[1] == 'kickme' then
 				api.kickUser(msg.chat.id, msg.from.id)
-			end
-			
-			
-				else
+
+				
 			if blocks[1] == 'clique_para_uma_brincadeira' then
 				api.kickUser(msg.chat.id, msg.from.id)
 			end
