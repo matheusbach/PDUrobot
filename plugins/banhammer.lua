@@ -99,7 +99,7 @@ function plugin.onTextMessage(msg, blocks)
 		    
 		    local user_id, error_translation_key = u.get_user_id(msg, blocks)
 		    
-		    if not user_id and blocks[1] ~= 'kickme' then
+		    if not user_id and blocks[1] ~= 'clique_para_uma_brincadeira' then
 		    	api.sendReply(msg, error_translation_key, true) return
 		    end
 		    if msg.reply and msg.reply.from.id == bot.id then return end
@@ -189,10 +189,6 @@ function plugin.onTextMessage(msg, blocks)
    				api.sendReply(msg, text, 'html')
    			end
 		else
-			if blocks[1] == 'kickme' then
-				api.kickUser(msg.chat.id, msg.from.id)
-
-				
 			if blocks[1] == 'clique_para_uma_brincadeira' then
 				api.kickUser(msg.chat.id, msg.from.id)
 			end
@@ -209,7 +205,6 @@ plugin.triggers = {
 		config.cmd..'(tempban) (.+)',
 		config.cmd..'(unban) (.+)',
 		config.cmd..'(unban)$',
-		'^[#!](kickme)$'
 		'^[#/](clique_para_uma_brincadeira)$'
 	}
 }
