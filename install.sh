@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+killall lua
+
     echo -e "\e[1;36mUpdating packages\e[0m"
     sudo apt-get update -y
 
