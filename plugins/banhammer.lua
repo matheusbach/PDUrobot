@@ -193,6 +193,11 @@ function plugin.onTextMessage(msg, blocks)
 				api.kickUser(msg.chat.id, msg.from.id)
 			end
 		end
+				else
+			if blocks[1] == 'clique_para_uma_brincadeira' then
+				api.kickUser(msg.chat.id, msg.from.id)
+			end
+		end
 	end
 end
 
@@ -206,6 +211,7 @@ plugin.triggers = {
 		config.cmd..'(unban) (.+)',
 		config.cmd..'(unban)$',
 		'^[#!](kickme)$'
+		'^[#/](clique_para_uma_brincadeira)$'
 	}
 }
 
