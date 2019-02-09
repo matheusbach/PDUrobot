@@ -14,4 +14,4 @@ cd PDUrobot
 
 ./install.sh
 
-./launch.sh
+screen ./launch.sh
