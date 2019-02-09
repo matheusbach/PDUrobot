@@ -62,19 +62,7 @@ return {
 	},
 	multipurpose_plugins = {},
 	available_languages = {
-		['en'] = 'English 🇬🇧',
-		['it'] = 'Italiano 🇮🇹',
-		['es'] = 'Español 🇪🇸',
 		['pt_BR'] = 'Português 🇧🇷',
-		['ru'] = 'Русский 🇷🇺',
-		['de'] = 'Deutsch 🇩🇪',
-		--['sv'] = 'Svensk 🇸🇪',
-		['ar'] = 'العربية 🇸🇩',
-		--['fr'] = 'Français 🇫🇷',
-		['zh'] = '中文 🇨🇳',
-		['fa'] = 'فارسی 🇮🇷',
-		['id'] = 'Bahasa Indonesia 🇮🇩',
-		['nl'] = 'Dutch 🇱🇺'
 	},
 	allow_fuzzy_translations = false,
 	chat_settings = {
