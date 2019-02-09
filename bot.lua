@@ -123,9 +123,9 @@ local function on_msg_receive(msg, callback) -- The fn run whenever a message is
 		if msg.date < os.time() - 7 then return end -- Do not process old messages.
 		if not msg.text then msg.text = msg.caption or '' end
 		
-		locale.language = db:get('lang:'..msg.chat.id) or 'en' --group language
+		locale.language = db:get('lang:'..msg.chat.id) or 'pt_BR' --group language
 		if not config.available_languages[locale.language] then
-			locale.language = 'en'
+			locale.language = 'pt_BR'
 		end
 		
 		collect_stats(msg)
@@ -179,9 +179,9 @@ local function on_msg_receive(msg, callback) -- The fn run whenever a message is
 	else
 		if msg.group_chat_created or (msg.new_chat_member and msg.new_chat_member.id == bot.id) then
 			-- set the language
-			--[[locale.language = db:get(string.format('lang:%d', msg.from.id)) or 'en'
+			--[[locale.language = db:get(string.format('lang:%d', msg.from.id)) or 'pt_BR'
 			if not config.available_languages[locale.language] then
-				locale.language = 'en'
+				locale.language = 'pt_BR'
 			end]]
 			
 			-- send disclamer
