@@ -59,6 +59,7 @@ return {
 		'welcome',
 		'admin',
 		'extra', -- Deve ficar sempre no final
+		'salvar',
 	},
 	multipurpose_plugins = {},
 	available_languages = {
