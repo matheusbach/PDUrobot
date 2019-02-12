@@ -39,7 +39,7 @@ function bot_init(on_reload) -- The function run when the bot is started or relo
 		table.insert(plugins, p)
 	end
 
-	print('\n'..clr.blue..'BOT RUNNING:'..clr.reset, clr.red..'[@'..bot.username .. '] [' .. bot.first_name ..'] ['..bot.id..']'..clr.reset..'\n')
+	print('\n'..clr.blue..'BOT INICIADO:'..clr.reset, clr.red..'[@'..bot.username .. '] [' .. bot.first_name ..'] ['..bot.id..']'..clr.reset..'\n')
 	
 	last_update = last_update or 0 -- Set loop variables: Update offset
 	last_cron = last_cron or os.time() -- the time of the last cron job
@@ -47,7 +47,7 @@ function bot_init(on_reload) -- The function run when the bot is started or relo
 	if on_reload then
 		return #plugins
 	else
-		api.sendAdmin('*Bot started!*\n_'..os.date('On %A, %d %B %Y\nAt %X')..'_\n'..#plugins..' plugins loaded', true)
+		api.sendAdmin('*Bot iniciado!*\n_'..os.date('On %A, %d %B %Y\nAt %X')..'_\n'..#plugins..' plugins carregados', true)
 		start_timestamp = os.time()
 		current = {h = 0}
 		last = {h = 0}
