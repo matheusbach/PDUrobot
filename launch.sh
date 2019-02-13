@@ -1,24 +1,37 @@
 #!/usr/bin/env bash
 echo "Iniciando Bot ...."
-echo "█▒▒▒▒▒▒▒▒▒ 10%"
-sleep 0.1
-echo "██▒▒▒▒▒▒▒▒ 20%"
-sleep 0.1
-echo "███▒▒▒▒▒▒▒ 30%"
-sleep 0.1
-echo "████▒▒▒▒▒▒ 40%"
-sleep 0.1
-echo "█████▒▒▒▒▒ 50%"
-sleep 0.1
-echo "██████▒▒▒▒ 60%"
-sleep 0.1
-echo "███████▒▒▒ 70%"
-sleep 0.1
-echo "████████▒▒ 80%"
-sleep 0.1
-echo "█████████▒ 90%"
-sleep 0.1
-echo "██████████ 100%"
+sleep 0.8
+clear
+echo "Iniciando Bot █▒▒▒▒▒▒▒▒▒ 10%"
+sleep 0.3
+clear
+echo "Iniciando Bot ██▒▒▒▒▒▒▒▒ 20%"
+sleep 0.3
+clear
+echo "Iniciando Bot ███▒▒▒▒▒▒▒ 30%"
+sleep 0.3
+clear
+echo "Iniciando Bot ████▒▒▒▒▒▒ 40%"
+sleep 0.3
+clear
+echo "Iniciando Bot █████▒▒▒▒▒ 50%"
+sleep 0.3
+clear
+echo "Iniciando Bot ██████▒▒▒▒ 60%"
+sleep 0.3
+clear
+echo "Iniciando Bot ███████▒▒▒ 70%"
+sleep 0.3
+clear
+echo "Iniciando Bot ████████▒▒ 80%"
+sleep 0.3
+clear
+echo "Iniciando Bot █████████▒ 90%"
+sleep 0.3
+clear
+echo "Iniciando Bot ██████████ 100%"
+sleep 0.7
+clear
 make_template() {
 	find . -name "*.lua" | sort |
 		xgettext --from-code=utf-8 \
@@ -33,7 +46,7 @@ make_template() {
 
 case $1 in moderador | "")
 	while true; do
-		lua moderador.lua
+		lua PDUrobot.lua
 		sleep 10
 	done
 
