@@ -1,11 +1,11 @@
 return {
-	Token = "Coloque o token aqui",
+	Token = "564676924:AAFvBaP9ceyLxu22VrvqyuSW9vRy3lPeL_A",
 	allowed_updates = {"message", "edited_message", "callback_query"},
 	human_readable_version = '1.0',
 	source_code = 'https://github.com/viniciusvrc/MODERADORbot',
 	grupo_bot = 'https://t.me/joinchat/HRGbs1GJbUCmvmgt02ex8g',	
 	canal_bot = 'https://t.me/Moderadornews',
-	nome_bot = 'Moderadorbot',
+	nome_bot = 'PDUbetaBot',
 	channel = '@Moderadornews',
 	lang = 'pt_BR',
 	cmd = '^[/!#]',
@@ -13,8 +13,8 @@ return {
 	-- END of CUSTOM APIs
 	superadmins = {ID}, -- COLOQUE SEU ID
 	log = {
-		chat = ID, -- COLOQUE O ID DE UM GRUPO OU O SEU
-		admin = ID,-- CLOQUE UM ID DE USUARIO
+		chat = 366723664, -- COLOQUE O ID DE UM GRUPO OU O SEU
+		admin = 366723664,-- CLOQUE UM ID DE USUARIO
 		stats = nil
 	},
 	bot_settings = {
