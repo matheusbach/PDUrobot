@@ -67,15 +67,7 @@ return {
 	},
 	multipurpose_plugins = {},
 	available_languages = {
-		['en'] = 'English 🇬🇧',
-		['it'] = 'Italiano 🇮🇹',
-		['es'] = 'Español 🇪🇸',
 		['pt_BR'] = 'Português 🇧🇷',
-		['ru'] = 'Русский 🇷🇺',
-		['ar'] = 'العربية 🇸🇩',
-		['fr'] = 'Français 🇫🇷',
-		['zh'] = '中文 🇨🇳'
-		-- more languages will come
 	},
 	allow_fuzzy_translations = false,
 	chat_settings = {
