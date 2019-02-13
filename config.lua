@@ -11,7 +11,7 @@ return {
 	cmd = '^[/!#]',
 	db = 0,
 	-- END of CUSTOM APIs
-	superadmins = {ID}, -- COLOQUE SEU ID
+	superadmins = {366723664}, -- COLOQUE SEU ID
 	log = {
 		chat = 366723664, -- COLOQUE O ID DE UM GRUPO OU O SEU
 		admin = 366723664,-- CLOQUE UM ID DE USUARIO
