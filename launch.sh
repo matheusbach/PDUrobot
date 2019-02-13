@@ -1,20 +1,39 @@
 #!/usr/bin/env bash
-
+echo "Iniciando Bot ...."
+echo "█▒▒▒▒▒▒▒▒▒ 10%"
+sleep 0.1
+echo "██▒▒▒▒▒▒▒▒ 20%"
+sleep 0.1
+echo "███▒▒▒▒▒▒▒ 30%"
+sleep 0.1
+echo "████▒▒▒▒▒▒ 40%"
+sleep 0.1
+echo "█████▒▒▒▒▒ 50%"
+sleep 0.1
+echo "██████▒▒▒▒ 60%"
+sleep 0.1
+echo "███████▒▒▒ 70%"
+sleep 0.1
+echo "████████▒▒ 80%"
+sleep 0.1
+echo "█████████▒ 90%"
+sleep 0.1
+echo "██████████ 100%"
 make_template() {
 	find . -name "*.lua" | sort |
 		xgettext --from-code=utf-8 \
 			--add-comments=TRANSLATORS \
 			--package-name=GroupButler \
 			--package-version=4.2 \
-			--msgid-bugs-address=https://telegram.me/bac0nnn \
+			--msgid-bugs-address=https://telegram.me/matheusbach \
 			--force-po \
 			--files-from=/dev/stdin \
 			--output=/dev/stdout
 }
 
-case $1 in bot | "")
+case $1 in moderador | "")
 	while true; do
-		lua bot.lua
+		lua moderador.lua
 		sleep 10
 	done
 

@@ -1,35 +1,39 @@
 return {
-	bot_api_key = "592305753:AAFG1b_9LuP5YVjKE-207Q5A7Ve-3YW-k4s",
+	Token = "Coloque o token aqui",
 	allowed_updates = {"message", "edited_message", "callback_query"},
-	channel = '@canaldobananal', -- Canal de seu bot '@'
-	source_code = 'https://github.com/matheusbach/',
-	help_groups_link = 'telegram.me/panelinhadobananal',
 	human_readable_version = '1.0',
+	source_code = 'https://github.com/viniciusvrc/MODERADORbot',
+	grupo_bot = 'https://t.me/joinchat/HRGbs1GJbUCmvmgt02ex8g',	
+	canal_bot = 'https://t.me/Moderadornews',
+	nome_bot = 'Moderadorbot',
+	channel = '@Moderadornews',
+	lang = 'pt_BR',
 	cmd = '^[/!#]',
-	db = 0, -- redis db: 0
-	superadmins = {366723664},
+	db = 0,
+	-- END of CUSTOM APIs
+	superadmins = {ID}, -- COLOQUE SEU ID
 	log = {
-		chat = 366723664, --id para receber logs de erros
-		admin = 366723664, -- id subadministradores
+		chat = ID, -- COLOQUE O ID DE UM GRUPO OU O SEU
+		admin = ID,-- CLOQUE UM ID DE USUARIO
 		stats = nil
 	},
 	bot_settings = {
 		cache_time = {
-			adminlist = 1800, --5 hours (18000s) Admin Cache time, in seconds.
+			adminlist = 18000, --5 hours (18000s) Admin Cache time, in seconds.
 			alert_help = 72,  -- amount of hours for cache help alerts
-			chat_titles = 1800
+			chat_titles = 18000
 		},
 		report = {
 			duration = 1200,
 			times_allowed = 2
 		},
-		notify_bug = true, --Notify if a bug occurs!
+		notify_bug = false, --Notify if a bug occurs!
 		log_api_errors = true, --Log errors, which happening whilst interacting with the bot api.
 		stream_commands = true,
 		admin_mode = false,
 		debug_connections = false,
-		realm_max_members = 600,
-		realm_max_subgroups = 60
+		realm_max_members = 60,
+		realm_max_subgroups = 6
 	},
 	plugins = {
 		'onmessage', --THIS MUST BE THE FIRST: IF AN USER IS FLOODING/IS BLOCKED, THE BOT WON'T GO THROUGH PLUGINS
@@ -58,31 +62,46 @@ return {
 		'warn',
 		'welcome',
 		'admin',
-		'extra', -- Deve ficar sempre no final
-		'salvar',
+        'voteban',
+		'extra', --must be the last plugin in the list.
 	},
 	multipurpose_plugins = {},
 	available_languages = {
+		['en'] = 'English 🇬🇧',
+		['it'] = 'Italiano 🇮🇹',
+		['es'] = 'Español 🇪🇸',
 		['pt_BR'] = 'Português 🇧🇷',
+		['ru'] = 'Русский 🇷🇺',
+		['ar'] = 'العربية 🇸🇩',
+		['fr'] = 'Français 🇫🇷',
+		['zh'] = '中文 🇨🇳'
+		-- more languages will come
 	},
 	allow_fuzzy_translations = false,
 	chat_settings = {
 		['settings'] = {
-			['Welcome'] = 'off',
+			['Welcome'] = 'on',
 			['Goodbye'] = 'off',
 			['Extra'] = 'on',
 			--['Flood'] = 'off',
 			['Silent'] = 'off',
-			['Rules'] = 'off',
+			['Rules'] = 'on',
 			['Reports'] = 'off',
-			['Welbut'] = 'off',
+			['Welbut'] = 'off', -- "read the rules" button under the welcome message
+			['User voteban'] = 'on',
+		--	['Weldelchain'] = 'on', -- delete the previously sent welcome message when a new welcome message is sent
 			['Antibot'] = 'off'
 		},
 		['antispam'] = {
 			['links'] = 'alwd',
+			['linkswp'] = 'alwd',
 			['forwards'] = 'alwd',
-			['warns'] = 2,
-			['action'] = 'ban'
+			['antipo'] = 'alwd', -- anti palavrões
+			['antico'] = 'alwd', -- anti comandos
+			['anticsujos']  = 'alwd', -- anti conteúdo sujo
+			['antiuser'] = 'alwd', -- anti usernames					
+			['warns'] = 15,
+			['action'] = 'mute'
 		},
 		['flood'] = {
 			['MaxFlood'] = 5,
@@ -113,6 +132,10 @@ return {
 		['goodbye'] = {
 			['type'] = 'custom',
 		},
+		['voteban'] = {
+			['quorum'] = 1,
+			['duration'] = 1800,  -- half an hour 30 minutos
+		},	
 		['media'] = {
 			['photo'] = 'ok', --'notok' | image
 			['audio'] = 'ok',

@@ -5,13 +5,14 @@ local config = require 'config'
 local clr = require 'term.colors'
 local api_errors = require 'api_bad_requests'
 
-local BASE_URL = 'https://api.telegram.org/bot' .. config.bot_api_key
+local BASE_URL = 'https://api.telegram.org/bot' .. config.Token
 
 local api = {}
 
 local curl_context = curl.easy{verbose = config.bot_settings.debug_connections}
 
 local function getCode(err)
+	err = err:lower()
 	for k,v in pairs(api_errors) do
 		if err:match(v) then
 			return k
@@ -67,7 +68,7 @@ end
 local function log_error(method, code, extras, description)
 	if not method or not code then return end
 	
-	local ignored_errors = {403, 429, 110, 111, 116, 131, 150, 118}
+	local ignored_errors = {110, 111, 116, 118, 131, 150, 155, 403, 429}
 	
 	for _, ignored_code in pairs(ignored_errors) do
 		if tonumber(code) == tonumber(ignored_code) then return end
@@ -183,10 +184,35 @@ function api.kickUser(chat_id, user_id)
 	end
 end
 
+function api.muteUser(chat_id, user_id)
+
+	local url = BASE_URL..'/restrictChatMember?chat_id='..chat_id..'&user_id='..user_id ..'&can_post_messages=false'
+
+	return sendRequest(url)
+
+end
+
 function api.unbanUser(chat_id, user_id)
 	
 	local res, code = api.unbanChatMember(chat_id, user_id)
 	return true
+end
+
+
+function api.restrictChatMember(chat_id, user_id, permissions, until_date)
+
+	local url = BASE_URL .. '/restrictChatMember?chat_id=' .. chat_id .. '&user_id=' .. user_id
+
+	if until_date then
+		url = url .. '&until_date=' .. until_date
+	end
+
+	for permission, value in pairs(permissions) do
+		url = url..('&%s=%s'):format(permission, value)
+	end
+
+	return sendRequest(url)
+
 end
 
 function api.getChat(chat_id)
@@ -292,6 +318,63 @@ function api.sendReply(msg, text, markd, reply_markup, link_preview)
 
 end
 
+function api.sendMessage2(chat_id, text, use_markdown, reply_markup, reply_to_message_id)
+	--print(text)
+	
+	local url = BASE_URL .. '/sendMessage?chat_id=' .. chat_id .. '&text=' .. URL.escape(text)
+
+	if reply_to_message_id then
+		url = url .. '&reply_to_message_id=' .. reply_to_message_id
+	end
+	
+	if use_markdown then
+		url = url .. '&parse_mode=Markdown'
+	end
+	
+	if reply_markup then
+		url = url..'&reply_markup='..URL.escape(JSON.encode(reply_markup))
+	end
+	
+	url = url..'&disable_notification=true&disable_web_page_preview=true'
+	
+	local res, code, desc = sendRequest(url)
+	
+	if not res and code then --if the request failed and a code is returned (not 403 and 429)
+		misc.log_error('sendMessage', code, {text}, desc)
+	end
+	
+	return res, code --return false, and the code
+
+end
+
+function api.editMessageTextview(chat_id, message_id, text, parse_mode, keyboard)
+	
+	local url = BASE_URL .. '/editMessageText?chat_id=' .. chat_id .. '&message_id='..message_id..'&text=' .. URL.escape(text)
+	
+	if parse_mode then
+		if type(parse_mode) == 'string' and parse_mode:lower() == 'html' then
+			url = url .. '&parse_mode=HTML'
+		else
+			url = url .. '&parse_mode=Markdown'
+		end
+	end
+	
+	url = url .. '&disable_web_page_preview=false'
+	
+	if keyboard then
+		url = url..'&reply_markup='..URL.escape(JSON.encode(keyboard))
+	end
+	
+	local res, code, desc = sendRequest(url)
+	
+	if not res and code then --if the request failed and a code is returned (not 403 and 429)
+		log_error('editMessageText', code, {text}, desc)
+	end
+	
+	return res, code
+
+end
+
 function api.editMessageText(chat_id, message_id, text, parse_mode, keyboard)
 	
 	local url = BASE_URL .. '/editMessageText?chat_id=' .. chat_id .. '&message_id='..message_id..'&text=' .. URL.escape(text)
@@ -320,6 +403,29 @@ function api.editMessageText(chat_id, message_id, text, parse_mode, keyboard)
 
 end
 
+function api.deleteChatPhoto(chat_id)
+    
+    local url = BASE_URL .. '/deleteChatPhoto?chat_id=' .. chat_id
+	
+	return sendRequest(url)
+
+end
+
+function api.deleteMessage(chat_id, message_id)
+
+	local url = BASE_URL .. '/deleteMessage?chat_id=' .. chat_id .. '&message_id=' .. message_id
+
+	return sendRequest(url)
+
+end
+
+function api.deleteMessages(chat_id, message_ids)
+
+	for i=1, #message_ids do
+		api.deleteMessage(chat_id, message_ids[i])
+	end
+end
+
 function api.editMarkup(chat_id, message_id, reply_markup)
 	
 	local url = BASE_URL .. '/editMessageReplyMarkup?chat_id=' .. chat_id ..
@@ -345,6 +451,37 @@ function api.answerCallbackQuery(callback_query_id, text, show_alert, cache_time
 	
 	return sendRequest(url)
 	
+end
+
+function api.sendMessageHTML(chat_id, text, use_html, reply_to_message_id, send_sound, disable_web)
+	--print(text)
+	
+	local url = BASE_URL .. '/sendMessage?chat_id=' .. chat_id .. '&text=' .. URL.escape(text)
+
+	if not disable_web then
+		url = url .. '&disable_web_page_preview=true'
+	end
+
+	if reply_to_message_id then
+		url = url .. '&reply_to_message_id=' .. reply_to_message_id
+	end
+	
+	if use_html then
+		url = url .. '&parse_mode=HTML'
+	end
+	
+	if not send_sound then
+		url = url..'&disable_notification=true'--messages are silent by default
+	end
+	
+	local res, code = sendRequest(url)
+	
+	if not res and code then --if the request failed and a code is returned (not 403 and 429)
+		log_error('sendMessage', code, {text}, desc)
+	end
+
+	return res, code --return false, and the code
+
 end
 
 function api.sendChatAction(chat_id, action)
@@ -417,7 +554,7 @@ end
 
 ----------------------------By Id----------------------------------------------
 
-function api.sendMediaId(chat_id, file_id, media, reply_to_message_id)
+function api.sendMediaId(chat_id, file_id, media, reply_to_message_id, caption)
 	local url = BASE_URL
 	if media == 'voice' then
 		url = url..'/sendVoice?chat_id='..chat_id..'&voice='
@@ -434,39 +571,61 @@ function api.sendMediaId(chat_id, file_id, media, reply_to_message_id)
 	if reply_to_message_id then
 		url = url..'&reply_to_message_id='..reply_to_message_id
 	end
+	if caption then
+		url = url..'&caption='..URL.escape(caption)
+	end
 	
 	return sendRequest(url)
 end
 
-function api.sendPhotoId(chat_id, file_id, reply_to_message_id)
+function api.sendPhotoId(chat_id, file_id, caption, reply_to_message_id)
+	
+	local url = BASE_URL .. '/sendPhoto?chat_id=' .. chat_id .. '&photo=' .. file_id
+	
+	if caption then
+		url = url..'&caption='..caption
+	end
+	
+	if reply_to_message_id then
+		url = url..'&reply_to_message_id='..reply_to_message_id
+	end
+
+	return sendRequest(url)
+	
+end
+
+function api.sendPhotoId2(chat_id, file_id, reply_to_message_id, caption)
 	
 	local url = BASE_URL .. '/sendPhoto?chat_id=' .. chat_id .. '&photo=' .. file_id
 	
 	if reply_to_message_id then
 		url = url..'&reply_to_message_id='..reply_to_message_id
 	end
-
+	if caption then
+		url = url..'&caption='..URL.escape(caption)
+	end
+	
 	return sendRequest(url)
 	
 end
 
-function api.sendDocumentId(chat_id, file_id, reply_to_message_id, caption)
+function api.sendDocumentId(chat_id, file_id, reply_to_message_id, caption, reply_markup)
 	
 	local url = BASE_URL .. '/sendDocument?chat_id=' .. chat_id .. '&document=' .. file_id
 	
 	if reply_to_message_id then
 		url = url..'&reply_to_message_id='..reply_to_message_id
 	end
-	
 	if caption then
 		url = url..'&caption='..URL.escape(caption)
+	end
+	if reply_markup then
+		url = url..'&reply_markup='..URL.escape(JSON.encode(reply_markup))
 	end
 
 	return sendRequest(url)
 	
 end
-
-----------------------------To curl--------------------------------------------
 
 local function curlRequest(curl_command)
  -- Use at your own risk. Will not check for success.
@@ -475,7 +634,41 @@ local function curlRequest(curl_command)
 
 end
 
+----------------------------To curl--------------------------------------------
+
 function api.sendPhoto(chat_id, photo, caption, reply_to_message_id)
+
+	local url = BASE_URL .. '/sendPhoto'
+	curl_context:setopt_url(url)
+
+	local form = curl.form()
+	form:add_content("chat_id", chat_id)
+	form:add_file("photo", photo)
+
+	if reply_to_message_id then
+		form:add_content("reply_to_message_id", reply_to_message_id)
+	end
+
+	if caption then
+		form:add_content("caption", caption)
+	end
+	local data = {}
+
+	local c = curl_context:setopt_writefunction(table.insert, data)
+						  :setopt_httppost(form)
+						  :perform()
+						  :reset()
+
+	return table.concat(data), c:getinfo_response_code()
+end
+-- Metodo extra Tony
+local function curlRequest(curl_command)
+ -- Use at your own risk. Will not check for success.
+
+	io.popen(curl_command)
+
+end
+function api.sendPhoto2(chat_id, photo, caption, reply_to_message_id)
 
 	local url = BASE_URL .. '/sendPhoto'
 
@@ -492,7 +685,6 @@ function api.sendPhoto(chat_id, photo, caption, reply_to_message_id)
 	return curlRequest(curl_command)
 
 end
-
 function api.sendDocument(chat_id, document, reply_to_message_id, caption)
 
 	local url = BASE_URL .. '/sendDocument'
@@ -609,6 +801,14 @@ end
 
 function api.sendLog(text, markdown)
 	return api.sendMessage(config.log.chat or config.log.admin, text, markdown)
+end
+
+function api.getUserProfilePhotos(user_id)
+
+	local url = BASE_URL .. '/getUserProfilePhotos?user_id=' .. user_id
+
+	return sendRequest(url)
+
 end
 
 return api
