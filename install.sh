@@ -17,7 +17,7 @@ cd ..
     
 echo -e "\e[1;36mInstalling rocks\e[0m"
     
-rocks="luasocket luasec redis-lua lua-term serpent dkjson Lua-cURL"
+rocks="luasocket luasec redis-lua lua-term serpent dkjson Lua-cURL lua-cjson luautf8"
 for rock in $rocks; do
     sudo luarocks install $rock
 done
