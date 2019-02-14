@@ -62,7 +62,9 @@ return {
 		'warn',
 		'welcome',
 		'admin',
-        'voteban',
+		'voteban',
+		'votekick',
+		'qr',
 		'extra', --must be the last plugin in the list.
 	},
 	multipurpose_plugins = {},
