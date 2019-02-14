@@ -77,6 +77,8 @@ return {
       .."Colors through hex notation: (\"a56729\" is brown)\n"
       .."Or colors through decimals: (\"255-192-203\" is pink)"
   },
+}
+
   plugin.triggers = {
     onTextMessage = {
       '^!qr "(%w+)" "(%w+)" (.+)$',
