@@ -58,6 +58,7 @@ return {
 		'warn',
 		'welcome',
 		'admin',
+		'gadofy',
 		'extra', -- Deve ficar sempre no final
 		'salvar',
 	},
