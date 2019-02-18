@@ -1,12 +1,12 @@
 return {
 	Token = "564676924:AAFvBaP9ceyLxu22VrvqyuSW9vRy3lPeL_A",
 	allowed_updates = {"message", "edited_message", "callback_query"},
-	human_readable_version = '1.0',
-	source_code = 'https://github.com/viniciusvrc/MODERADORbot',
-	grupo_bot = 'https://t.me/joinchat/HRGbs1GJbUCmvmgt02ex8g',	
-	canal_bot = 'https://t.me/Moderadornews',
+	human_readable_version = '2.0',
+	source_code = 'https://github.com/matheusbach/PDUrobot',
+	grupo_bot = 'https://t.me/joinchat/?',	
+	canal_bot = 'https://t.me/?',
 	nome_bot = 'PDUbetaBot',
-	channel = '@Moderadornews',
+	channel = '@?',
 	lang = 'pt_BR',
 	cmd = '^[/!#]',
 	db = 0,
@@ -19,9 +19,9 @@ return {
 	},
 	bot_settings = {
 		cache_time = {
-			adminlist = 18000, --5 hours (18000s) Admin Cache time, in seconds.
+			adminlist = 1800, -- Admin Cache time, in seconds.
 			alert_help = 72,  -- amount of hours for cache help alerts
-			chat_titles = 18000
+			chat_titles = 1800
 		},
 		report = {
 			duration = 1200,
@@ -32,8 +32,8 @@ return {
 		stream_commands = true,
 		admin_mode = false,
 		debug_connections = false,
-		realm_max_members = 60,
-		realm_max_subgroups = 6
+		realm_max_members = 600,
+		realm_max_subgroups = 60
 	},
 	plugins = {
 		'onmessage', --THIS MUST BE THE FIRST: IF AN USER IS FLOODING/IS BLOCKED, THE BOT WON'T GO THROUGH PLUGINS
@@ -74,16 +74,16 @@ return {
 	allow_fuzzy_translations = false,
 	chat_settings = {
 		['settings'] = {
-			['Welcome'] = 'on',
+			['Welcome'] = 'off',
 			['Goodbye'] = 'off',
 			['Extra'] = 'on',
-			--['Flood'] = 'off',
+			['Flood'] = 'off',
 			['Silent'] = 'off',
 			['Rules'] = 'on',
-			['Reports'] = 'off',
+			['Reports'] = 'on',
 			['Welbut'] = 'off', -- "read the rules" button under the welcome message
 			['User voteban'] = 'on',
-		--	['Weldelchain'] = 'on', -- delete the previously sent welcome message when a new welcome message is sent
+			['Weldelchain'] = 'on', -- delete the previously sent welcome message when a new welcome message is sent
 			['Antibot'] = 'off'
 		},
 		['antispam'] = {
@@ -127,8 +127,8 @@ return {
 			['type'] = 'custom',
 		},
 		['voteban'] = {
-			['quorum'] = 1,
-			['duration'] = 1800,  -- half an hour 30 minutos
+			['quorum'] = 10,
+			['duration'] = 900,  -- 15 minutos
 		},	
 		['media'] = {
 			['photo'] = 'ok', --'notok' | image

@@ -312,6 +312,29 @@ function api.sendMessage(chat_id, text, parse_mode, reply_markup, reply_to_messa
 
 end
 
+function api.sendMessagePreview(chat_id, text, parse_mode)
+	--print(text)
+	
+	local url = BASE_URL .. '/sendMessage?chat_id=' .. chat_id .. '&text=' .. URL.escape(text)
+	
+	if parse_mode then
+		if type(parse_mode) == 'string' and parse_mode:lower() == 'html' then
+			url = url .. '&parse_mode=HTML'
+		else
+			url = url .. '&parse_mode=Markdown'
+		end
+	end
+	
+	local res, code, desc = sendRequest(url)
+	
+	if not res and code then --if the request failed and a code is returned (not 403 and 429)
+		log_error('sendMessage', code, {text}, desc)
+	end
+	
+	return res, code --return false, and the code
+
+end
+
 function api.sendReply(msg, text, markd, reply_markup, link_preview)
 
 	return api.sendMessage(msg.chat.id, text, markd, reply_markup, msg.message_id, link_preview)

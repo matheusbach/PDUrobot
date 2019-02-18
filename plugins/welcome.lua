@@ -60,7 +60,7 @@ local function get_welcome(msg)
 	--	socket.sleep(5)			
 	--	api.deleteMessage(msg.chat.id, msg.message_id)
 	    if msg.from.username == nil then
-	      	local sem_username = _('*Olá* %s *Você esta sem nome de usuário.*[Tutorial username](https://t.me/ModeradorNews/202)'):format(msg.from.first_name)
+	      	local sem_username = _('%s *Você esta sem @username e em nosso grupo é obrigatório ter um. Clique *[aqui](https://t.me/panelinhadobananal/263467) *para aprender a botar um*'):format(msg.from.first_name)
 	      	local res = api.sendMessage(msg.chat.id, sem_username, true)
 	    --  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem nome de usuário.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/202">.</a>',  true, false, false, true)
 	      	if res then
@@ -69,7 +69,7 @@ local function get_welcome(msg)
 	    end
 		local fotos = api.getUserProfilePhotos(msg.from.id)
 		if fotos.result.total_count == 0 then
-			local sem_foto = _('*Olá* %s *Você esta sem foto de perfil.*[Tutorial foto](https://t.me/ModeradorNews/201)'):format(msg.from.first_name)
+			local sem_foto = _('%s *Você esta sem foto de perfil e em nosso grupo é obrigatório ter um. Clique *[aqui](https://t.me/panelinhadobananal/263466) *para aprender a botar uma*'):format(msg.from.first_name)
 	      	local res = api.sendMessage(msg.chat.id, sem_foto, true)
 	    --  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem foto de perfil.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/201">.</a>', true, false, false, true)
 	      	if res then
