@@ -23,7 +23,6 @@ end
 local function get_header(initiator, defendant, supports, oppositionists, quorum, expired, informative, previous_exists)
 	assert(supports + oppositionists < quorum)
 	assert(not informative  -- the usual poll
-		or informative == 'against bot'  -- attempt to kick the bot
 		or informative == 'against himself'  -- attempt to kick himself
 		or informative == 'against admin'  -- attempt to kick an admin
 		or informative == 'bot not admin')  -- the bot isn't an admin
@@ -36,7 +35,6 @@ local function get_header(initiator, defendant, supports, oppositionists, quorum
 	if defendant.id == initiator.id then
 		table.insert(lines, _("%s suggests to kick himself. kick him?\n"):format(u.full_name(initiator)))
 	elseif defendant.id == bot.id then
-		table.insert(lines, _("%s suggests to kick me. Do you really want to kick me? 😓\n"):format(u.full_name(initiator)))
 	else
 		table.insert(lines, _("%s suggests to kick %s. kick him?\n"):format(u.full_name(initiator), u.full_name(defendant)))
 	end
@@ -58,7 +56,7 @@ local function get_header(initiator, defendant, supports, oppositionists, quorum
 	end
 	if informative == 'bot not admin' then
 		-- TODO: add info about how to make the bot admin
-		table.insert(lines, _("\n*Informative poll*. User won't kickned because I'am not an admin."))
+		table.insert(lines, _("\n*Informative poll*. User won't kicked because I'am not an admin."))
 	end
 
 	return table.concat(lines, '\n')
@@ -67,18 +65,17 @@ end
 -- return text of messages with information about a finished poll
 local function conclusion(initiator, defendant, supports, oppositionists, quorum, upshot, informative)
 	assert(not upshot and informative  -- that was informative poll
-		or upshot == 'foi kickado'  -- the user was successfull kickned
-		or upshot == 'bot não é admin'  -- kick fail, because the bot ceased to be an admin
+		or upshot == 'was kicked'  -- the user was successfull kicked
+		or upshot == 'bot not admin'  -- kick fail, because the bot ceased to be an admin
 		or upshot == 'already admin'  -- kick fail, because the user became an admin
 		or upshot == 'was protected'  -- a community interceded for the user
 		or upshot == 'no decision'  -- the voting time has expired
 		or upshot == 'canceled')  -- the poll was closed by initiator
 	assert(not informative  -- the usual poll
-		or informative == 'against bot'  -- attempt to kick the bot
 		or informative == 'against himself'  -- attempt to kick himself
 		or informative == 'against admin'  -- attempt to kick an admin
 		or informative == 'bot not admin')  -- the bot was not an admin
-	assert(supports + oppositionists == quorum and supports > oppositionists and upshot == 'was kickned'
+	assert(supports + oppositionists == quorum and supports > oppositionists and upshot == 'was kicked'
 		or supports + oppositionists == quorum and supports > oppositionists and upshot == 'bot not admin'
 		or supports + oppositionists == quorum and supports > oppositionists and upshot == 'already admin'
 		or supports + oppositionists == quorum and supports <= oppositionists and upshot == 'was protected'
@@ -88,8 +85,8 @@ local function conclusion(initiator, defendant, supports, oppositionists, quorum
 	local lines = {}
 
 	local defendant_name = u.full_name(defendant)
-	if upshot == 'foi kickado' then
-		table.insert(lines, _("The voting was closed, and %s was kickned according "
+	if upshot == 'was kicked' then
+		table.insert(lines, _("The voting was closed, and %s was kicked according "
 			.. "to decision of community. The results:\n"):format(defendant_name))
 	end
 	if upshot == 'bot not admin' then
@@ -116,7 +113,7 @@ local function conclusion(initiator, defendant, supports, oppositionists, quorum
 	end
 	if informative and not upshot then
 		table.insert(lines, _("The voting was closed, but it was informative so %s hadn't "
-			.. "been kickned. The results:\n"):format(u.full_name(defendant)))
+			.. "been kicked. The results:\n"):format(u.full_name(defendant)))
 	end
 
 	-- TODO: make plural forms
@@ -127,17 +124,14 @@ local function conclusion(initiator, defendant, supports, oppositionists, quorum
 	end
 
 	if upshot ~= 'was protected' then
-		if informative == 'against bot' then
-			table.insert(lines, _("\n*That was informative poll*. Against me they can't vote."))
-		end
 		if informative == 'against himself' then
 			table.insert(lines, _("\n*That was informative poll*. The user wanted to kick himself."))
 		end
 		if informative == 'against admin' then
-			table.insert(lines, _("\n*That was informative poll*. User was not kickned because he is an admin."))
+			table.insert(lines, _("\n*That was informative poll*. User was not kicked because he is an admin."))
 		end
 		if informative == 'bot not admin' then
-			table.insert(lines, _("\n*That was informative poll*. User was kickned because I'am not an admin."))
+			table.insert(lines, _("\n*That was informative poll*. User was kicked because I'am not an admin."))
 		end
 	end
 
@@ -171,7 +165,8 @@ local function generate_poll(msg, defendant)
 	-- Detect informative poll
 	local informative
 	if defendant.id == bot.id then
-		informative = 'against bot'
+	api.sendMessage(msg.chat.id, _("😑"))
+	api.sendMessage(msg.chat.id, _("Nem pense nisso fiatinho"))
 	elseif initiator.id == defendant.id then
 		informative = 'against himself'
 	elseif u.is_admin(msg.chat.id, defendant.id) then
@@ -282,7 +277,7 @@ local function change_votes_machinery(chat_id, user_id, from_id, value)
 
 			local upshot
 			if send_confirmation then
-				upshot = 'was kickned'
+				upshot = 'was kicked'
 			elseif code == 101 or code == 105 or code == 107 then
 				upshot = 'bot not admin'
 			elseif code == 102 or code == 104 then
@@ -297,9 +292,9 @@ local function change_votes_machinery(chat_id, user_id, from_id, value)
 			api.editMessageText(chat_id, msg_id, text, true)
 
 			if send_confirmation then
-				local text = _("%s has been kickned ✨"):format(u.full_name(defendant))
+				local text = _("%s has been kicked ✨"):format(u.full_name(defendant))
 				local msg = api.sendMessage(chat_id, text, true, nil, msg_id).result
-				u.logEvent('votekick_kickned', msg, {user = defendant, init = initiator})
+				u.logEvent('votekick_kicked', msg, {user = defendant, init = initiator})
 			end
 			db:del(hash, hash .. ':supports', hash .. ':oppositionists')
 		else

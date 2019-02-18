@@ -62,7 +62,6 @@ return {
 		'warn',
 		'welcome',
 		'admin',
-		'voteban',
 		'votekick',
 		'qr',
 		'extra', --must be the last plugin in the list.
@@ -82,7 +81,7 @@ return {
 			['Rules'] = 'on',
 			['Reports'] = 'on',
 			['Welbut'] = 'off', -- "read the rules" button under the welcome message
-			['User voteban'] = 'on',
+			['User votekick'] = 'on',
 			['Weldelchain'] = 'on', -- delete the previously sent welcome message when a new welcome message is sent
 			['Antibot'] = 'off'
 		},
@@ -126,7 +125,7 @@ return {
 		['goodbye'] = {
 			['type'] = 'custom',
 		},
-		['voteban'] = {
+		['votekick'] = {
 			['quorum'] = 10,
 			['duration'] = 900,  -- 15 minutos
 		},	

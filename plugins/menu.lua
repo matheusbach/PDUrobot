@@ -117,11 +117,11 @@ local function step(count, direction)
 	return ex[index + direction]
 end
 
-local function changeVotebanSetting(chat_id, action)
-	local hash = string.format('chat:%d:voteban', chat_id)
+local function changeVotekickSetting(chat_id, action)
+	local hash = string.format('chat:%d:votekick', chat_id)
 
 	if action == 'DimDuration' or action == 'RaiseDuration' then
-		local old_value = tonumber(db:hget(hash, 'duration') or config.chat_settings.voteban.duration)
+		local old_value = tonumber(db:hget(hash, 'duration') or config.chat_settings.votekick.duration)
 		local direction = 1
 		if action == 'DimDuration' then direction = -1 end
 		local new_value = step(old_value / 60, direction) * 60
@@ -130,7 +130,7 @@ local function changeVotebanSetting(chat_id, action)
 	end
 
 	if action == 'DimQuorum' or action == 'RaiseQuorum' then
-		local old_value = tonumber(db:hget(hash, 'quorum') or config.chat_settings.voteban.quorum)
+		local old_value = tonumber(db:hget(hash, 'quorum') or config.chat_settings.votekick.quorum)
 		local new_value = old_value + 1
 		if action == 'DimQuorum' then
 			new_value = old_value - 1
@@ -164,7 +164,7 @@ local function adminsettings_table(settings, chat_id)
     local return_table = {}
     local icon_off, icon_on = '☑️', '✅'
     for field, default in pairs(settings) do
-        if field ~= 'Extra' and field ~= 'Rules' and field ~= 'voteban' then
+        if field ~= 'Extra' and field ~= 'Rules' and field ~= 'votekick' then
             local status = (db:hget('chat:'..chat_id..':settings', field)) or default
             if status == 'off' then
                 return_table[field] = icon_off
@@ -193,16 +193,16 @@ local function charsettings_table(settings, chat_id)
     return return_table
 end
 
-local function insert_voteban_section(keyboard, chat_id)
+local function insert_votekick_section(keyboard, chat_id)
 	local hash = string.format('chat:%d:settings', chat_id)
-	local status = db:hget(hash, 'voteban') or config.chat_settings.voteban.status
+	local status = db:hget(hash, 'votekick') or config.chat_settings.votekick.status
 	if status == 'off' then
 		status = '👤'
 	else
 		status = '👥'
 	end
-	hash = string.format('chat:%d:voteban', chat_id)
-	local duration = tonumber(db:hget(hash, 'duration')) or config.chat_settings.voteban.duration
+	hash = string.format('chat:%d:votekick', chat_id)
+	local duration = tonumber(db:hget(hash, 'duration')) or config.chat_settings.votekick.duration
 	if duration < 70 * 60 then
 		-- TRANSLATORS: this is an abbreviation for minutes
 		duration = _("%d min"):format(duration / 60)
@@ -210,11 +210,11 @@ local function insert_voteban_section(keyboard, chat_id)
 		-- TODO: make plural forms
 		duration = _("%d hours"):format(duration / 3600)
 	end
-	local quorum = db:hget(hash, 'quorum') or config.chat_settings.voteban.quorum
+	local quorum = db:hget(hash, 'quorum') or config.chat_settings.votekick.quorum
 
 	table.insert(keyboard, {
-		{text = _("Polls for ban"), callback_data='menu:alert:settings:'..chat_id},
-		{text = status, callback_data='menu:voteban:'..chat_id},
+		{text = _("pedido de votekick"), callback_data='menu:alert:settings:'..chat_id},
+		{text = status, callback_data='menu:votekick:'..chat_id},
 	})
 	table.insert(keyboard, {
 		{text = _("Duration"), callback_data='menu:alert:values:'..chat_id},
@@ -268,7 +268,7 @@ local function doKeyboard_menu(chat_id)
     settings_section = charsettings_table(config.chat_settings['char'], chat_id)
     keyboad = insert_settings_section(keyboard, settings_section, chat_id)
     
-	insert_voteban_section(keyboard.inline_keyboard, chat_id)
+	insert_votekick_section(keyboard.inline_keyboard, chat_id)
 
     --warn
     local max = (db:hget('chat:'..chat_id..':warnsettings', 'max')) or config.chat_settings['warnsettings']['max']
@@ -332,7 +332,7 @@ function plugin.onCallbackQuery(msg, blocks)
                 text = changeCharSettings(chat_id, blocks[2])
             elseif blocks[2] == 'DimDuration' or blocks[2] == 'RaiseDuration'
                 or blocks[2] == 'DimQuorum' or blocks[2] == 'RaiseQuorum' then
-                text = string.format('%d → %d', changeVotebanSetting(chat_id, blocks[2]))
+                text = string.format('%d → %d', changeVotekickSetting(chat_id, blocks[2]))
             else
                 text, show_alert = u.changeSettingStatus(chat_id, blocks[2])
             end

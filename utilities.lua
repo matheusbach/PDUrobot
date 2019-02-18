@@ -891,7 +891,7 @@ function utilities.changeSettingStatus(chat_id, field)
 		flood = _("Anti-flood is now off"),
 		rules = _("/rules will reply in private (for users)"),
 		silent = _("Silent mode is now off"),
-		voteban = _("Now /voteban will be available for admins only"),
+		votekick = _("Now /votekick will be available for admins only"),
 		preview = _("Links preview disabled"),
 		welbut = _("Welcome message without a button for the rules")
 	}
@@ -903,7 +903,7 @@ function utilities.changeSettingStatus(chat_id, field)
 		flood = _("Anti-flood is now on"),
 		rules = _("/rules will reply in the group (with everyone)"),
 		silent = _("Silent mode is now on"),
-		voteban = _("Now /voteban will be available for admins only"),
+		votekick = _("Now /votekick will be available for admins only"),
 		preview = _("Links preview enabled"),
 		welbut = _("The welcome message will have a button for the rules")
 	}
