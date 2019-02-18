@@ -12,8 +12,8 @@ local function do_keyboard_vote(user_id)
 				{text = _("❎ No"), callback_data = string.format('votekick:decrease:%d', user_id)},
 			},
 			{
-				{text = _("Revoke the vote"), callback_data = string.format('votekick:revoke:%d', user_id)},
-				{text = _("Cancel the poll"), callback_data = string.format('votekick:cancel:%d', user_id)},
+				{text = _("Retirar o votp"), callback_data = string.format('votekick:revoke:%d', user_id)},
+				{text = _("Cancelar votekick"), callback_data = string.format('votekick:cancel:%d', user_id)},
 			},
 		}
 	}
@@ -29,34 +29,34 @@ local function get_header(initiator, defendant, supports, oppositionists, quorum
 	local lines = {}
 	
 	if previous_exists then
-		table.insert(lines, _("ℹ This is _continuation_ of the previous poll."))
+		table.insert(lines, _("ℹ Essa é a continuação do votekick passado."))
 	end
 
 	if defendant.id == initiator.id then
-		table.insert(lines, _("%s suggests to kick himself. kick him?\n"):format(u.full_name(initiator)))
+		table.insert(lines, _("%s pediu pra ser kickado. kickar ele?\n"):format(u.full_name(initiator)))
 	elseif defendant.id == bot.id then
 	else
-		table.insert(lines, _("%s suggests to kick %s. kick him?\n"):format(u.full_name(initiator), u.full_name(defendant)))
+		table.insert(lines, _("%s pediu pra kickar %s. kickar ele?\n"):format(u.full_name(initiator), u.full_name(defendant)))
 	end
 
 	-- TODO: make plural forms
-	table.insert(lines, _("🔨 %d users voted *for kick*."):format(supports))
-	table.insert(lines, _("❎ %d users voted *against kick*."):format(oppositionists))
-	table.insert(lines, _("❗ Requires additional %d users."):format(quorum - supports - oppositionists))
-	table.insert(lines, _("🕒 The poll will be automatically closed in %d minutes"):format((expired - os.time()) / 60))
+	table.insert(lines, _("🔨 %d votaram *pra kickar*."):format(supports))
+	table.insert(lines, _("❎ %d votaram *pra não kickar*."):format(oppositionists))
+	table.insert(lines, _("❗ Precisa mais %d usuários."):format(quorum - supports - oppositionists))
+	table.insert(lines, _("🕒 O votekick vai ser encerado automaticamente em %d minutos"):format((expired - os.time()) / 60))
 
 	if informative == 'against bot' then
-		table.insert(lines, _("\n*Informative poll*. You can't vote for kick me."))
+		table.insert(lines, _("\n*Informative poll*. Você não pode me kickar."))
 	end
 	if informative == 'against himself' then
-		table.insert(lines, _("\n*Informative poll*. You can't vote for kick yourself."))
+		table.insert(lines, _("\n*Informative poll*. Você não pode votar para se auto-kickar."))
 	end
 	if informative == 'against admin' then
-		table.insert(lines, _("\n*Informative poll*. User won't kickned because he is an admin."))
+		table.insert(lines, _("\n*Informative poll*. Usuário não pôde ser kickado porque ele é admin."))
 	end
 	if informative == 'bot not admin' then
 		-- TODO: add info about how to make the bot admin
-		table.insert(lines, _("\n*Informative poll*. User won't kicked because I'am not an admin."))
+		table.insert(lines, _("\n*Informative poll*. Não pude kickar o usuário porque eu não tenho mod."))
 	end
 
 	return table.concat(lines, '\n')
@@ -86,8 +86,8 @@ local function conclusion(initiator, defendant, supports, oppositionists, quorum
 
 	local defendant_name = u.full_name(defendant)
 	if upshot == 'was kicked' then
-		table.insert(lines, _("The voting was closed, and %s was kicked according "
-			.. "to decision of community. The results:\n"):format(defendant_name))
+		table.insert(lines, _("Votekick encerado e o gordão %s kickado de acordo com "
+			.. "a decisão da comunidade. Resultados:\n"):format(defendant_name))
 	end
 	if upshot == 'bot not admin' then
 		table.insert(lines, _("⚠ The voting was closed, a community decided kick %s, "
@@ -117,10 +117,10 @@ local function conclusion(initiator, defendant, supports, oppositionists, quorum
 	end
 
 	-- TODO: make plural forms
-	table.insert(lines, _("🔨 %d users voted *for kick*."):format(supports))
-	table.insert(lines, _("❎ %d users voted *against kick*."):format(oppositionists))
+	table.insert(lines, _("🔨 %d votaram *pra kickar*."):format(supports))
+	table.insert(lines, _("❎ %d votos *contra*."):format(oppositionists))
 	if upshot == 'no decision' then
-		table.insert(lines, _("❗ It was not enough votes from %d users"):format(quorum - supports - oppositionists))
+		table.insert(lines, _("❗ não foram votos suficientes para %d usuários"):format(quorum - supports - oppositionists))
 	end
 
 	if upshot ~= 'was protected' then
@@ -140,13 +140,13 @@ end
 
 local function generate_poll(msg, defendant)
 	if not defendant then
-		api.sendMessage(msg.chat.id, _("Against whom do you vote?"))
+		api.sendMessage(msg.chat.id, _("Contra quem quer votar?"))
 		return false
 	end
 
 	local hash = string.format('chat:%d:votekick', msg.chat.id)
 	local quorum = tonumber(db:hget(hash, 'quorum') or config.chat_settings.votekick.quorum)
-	local duration = tonumber(db:hget(hash, 'duration') or config.chat_settings.votekick.duration)
+	local duration = tonumber(db:hget(hash, 'duratduraçãoion') or config.chat_settings.votekick.duration)
 
 	-- Detect if previous poll was or not and set the initiator
 	local hash = string.format('chat:%d:votekick:%d', msg.chat.id, defendant.id)
@@ -257,10 +257,10 @@ local function change_votes_machinery(chat_id, user_id, from_id, value)
 	local informative = db:hget(hash, 'informative')
 
 	if not db:exists(hash) then
-		return _("🔴 The poll is already closed. You're late")
+		return _("🔴 ta atrasado mano, votekick já acabou")
 	end
 	if from_id == user_id and informative ~= 'against himself' then
-		return _("🚷 You can't vote about yourself")
+		return _("🚷 Você não pode votar sobre você mesmo")
 	end
 
 	local text, without_name
@@ -436,10 +436,10 @@ function plugin.onCallbackQuery(msg, blocks)
 			api.editMessageText(msg.chat.id, msg.message_id, text, true)
 			db:del(hash, hash .. ':supports', hash .. ':oppositionists')
 		elseif u.is_admin(msg.chat.id, msg.from.id) then
-			api.editMessageText(msg.chat.id, msg.message_id, _("The poll was closed by administrator"))
+			api.editMessageText(msg.chat.id, msg.message_id, _("Votekick cancelado por corno"))
 			db:del(hash, hash .. ':supports', hash .. ':oppositionists')
 		else
-			text = _("🚷 Only administrators or initiator can close the poll")
+			text = _("🚷 Só quem pediu o voteban ou algum corno pode cancelar o votekick")
 		end
 	end
 	if text then
