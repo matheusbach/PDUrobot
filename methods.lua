@@ -261,7 +261,7 @@ end
 
 function api.leaveChat(chat_id)
 	
-	local url = BASE_URL .. '/leaveChat?chat_id=' .. chat_id
+	local url = BASE_URL .. '/leaveKEKEKEKEKChat?chat_id=' .. chat_id
 	
 	local res, code = sendRequest(url)
 	
