@@ -20,6 +20,13 @@ local function get_motivation(msg)
 	end			
 end	
 
+local function set_lang(chat_id)
+	locale.language = db:get('lang:'..chat_id) or 'en' --group language
+	if not config.available_languages[locale.language] then
+		locale.language = 'en'
+	end
+end
+
 function plugin.cron()
 	local all = db:hgetall('tempbanned')
 	if next(all) then
@@ -32,6 +39,7 @@ function plugin.cron()
 				db:hdel('tempbanned', unban_time)
 				db:srem('chat:'..chat_id..':tempbanned', user_id) --hash needed to check if an user is already tempbanned or not
 				if user_object then
+					set_lang(chat_id)
 					api.sendMessage(chat_id, _("Ban expired for %s [<code>%d</code>]"):format(u.getname_final(user_object.result), user_object.result.id), 'html')
 				end
 				if chat_object then
@@ -45,6 +53,7 @@ function plugin.cron()
 					local chat_string = chat_title
 					if chat_link then chat_string = ('</i><a href="%s">%s</a><i>'):format(chat_link, chat_title) end
 					print(("<i>Your ban from %s has expired</i>"):format(chat_string))
+					set_lang(user_id)
 					api.sendMessage(user_id, _("<i>Your ban from %s has expired</i>"):format(chat_string), 'html')
 				end
 			end
@@ -99,10 +108,10 @@ function plugin.onTextMessage(msg, blocks)
 		    
 		    local user_id, error_translation_key = u.get_user_id(msg, blocks)
 		    
-		    if not user_id and blocks[1] ~= 'clique_para_uma_brincadeira' then
+		    if not user_id and blocks[1] ~= 'kickme' then
 		    	api.sendReply(msg, error_translation_key, true) return
 		    end
-		    if msg.reply and msg.reply.from.id == bot.id then return end
+		    if tonumber(user_id) == bot.id then return end
 		 	
 		 	local res
 		 	local chat_id = msg.chat.id
@@ -183,13 +192,17 @@ function plugin.onTextMessage(msg, blocks)
 		    	end
     		end
    			if blocks[1] == 'unban' then
-   				api.unbanUser(chat_id, user_id)
-   				u.logEvent('unban', msg, {motivation = get_motivation(msg), admin = admin, user = kicked, user_id = user_id})
-   				local text = _("%s unbanned by %s!"):format(kicked, admin)
-   				api.sendReply(msg, text, 'html')
+   				if u.is_admin(chat_id, user_id) then
+   					api.sendReply(msg, _("_An admin can't be unbanned_"), true)
+   				else
+   					api.unbanUser(chat_id, user_id)
+   					u.logEvent('unban', msg, {motivation = get_motivation(msg), admin = admin, user = kicked, user_id = user_id})
+   					local text = _("%s unbanned by %s!"):format(kicked, admin)
+   					api.sendReply(msg, text, 'html')
+   				end
    			end
 		else
-			if blocks[1] == 'clique_para_uma_brincadeira' then
+			if blocks[1] == 'kickme' then
 				api.kickUser(msg.chat.id, msg.from.id)
 			end
 		end
@@ -205,7 +218,7 @@ plugin.triggers = {
 		config.cmd..'(tempban) (.+)',
 		config.cmd..'(unban) (.+)',
 		config.cmd..'(unban)$',
-		'^[#/](clique_para_uma_brincadeira)$'
+		config.cmd..'(kickme)$',
 	}
 }
 

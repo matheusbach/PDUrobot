@@ -1,21 +1,25 @@
 return {
-	bot_api_key = "592305753:AAFG1b_9LuP5YVjKE-207Q5A7Ve-3YW-k4s",
+	Token = "564676924:AAFvBaP9ceyLxu22VrvqyuSW9vRy3lPeL_A",
 	allowed_updates = {"message", "edited_message", "callback_query"},
-	channel = '@canaldobananal', -- Canal de seu bot '@'
-	source_code = 'https://github.com/matheusbach/',
-	help_groups_link = 'telegram.me/panelinhadobananal',
-	human_readable_version = '1.0',
+	human_readable_version = '2.0',
+	source_code = 'https://github.com/matheusbach/PDUrobot',
+	grupo_bot = 'https://t.me/joinchat/?',	
+	canal_bot = 'https://t.me/?',
+	nome_bot = 'PDUbetaBot',
+	channel = '@canaldobananal',
+	lang = 'pt_BR',
 	cmd = '^[/!#]',
-	db = 0, -- redis db: 0
-	superadmins = {366723664},
+	db = 0,
+	-- END of CUSTOM APIs
+	superadmins = {366723664}, -- COLOQUE SEU ID
 	log = {
-		chat = 366723664, --id para receber logs de erros
-		admin = 366723664, -- id subadministradores
+		chat = 366723664, -- COLOQUE O ID DE UM GRUPO OU O SEU
+		admin = 366723664,-- CLOQUE UM ID DE USUARIO
 		stats = nil
 	},
 	bot_settings = {
 		cache_time = {
-			adminlist = 1800, --5 hours (18000s) Admin Cache time, in seconds.
+			adminlist = 1800, -- Admin Cache time, in seconds.
 			alert_help = 72,  -- amount of hours for cache help alerts
 			chat_titles = 1800
 		},
@@ -23,7 +27,7 @@ return {
 			duration = 1200,
 			times_allowed = 2
 		},
-		notify_bug = true, --Notify if a bug occurs!
+		notify_bug = false, --Notify if a bug occurs!
 		log_api_errors = true, --Log errors, which happening whilst interacting with the bot api.
 		stream_commands = true,
 		admin_mode = false,
@@ -58,9 +62,9 @@ return {
 		'warn',
 		'welcome',
 		'admin',
-		'btc',
-		'extra', -- Deve ficar sempre no final
-		'salvar',
+		'votekick',
+		'qr',
+		'extra', --must be the last plugin in the list.
 	},
 	multipurpose_plugins = {},
 	available_languages = {
@@ -72,18 +76,25 @@ return {
 			['Welcome'] = 'off',
 			['Goodbye'] = 'off',
 			['Extra'] = 'on',
-			--['Flood'] = 'off',
+			['Flood'] = 'off',
 			['Silent'] = 'off',
-			['Rules'] = 'off',
-			['Reports'] = 'off',
-			['Welbut'] = 'off',
+			['Rules'] = 'on',
+			['Reports'] = 'on',
+			['Welbut'] = 'off', -- "read the rules" button under the welcome message
+			['User votekick'] = 'on',
+			['Weldelchain'] = 'on', -- delete the previously sent welcome message when a new welcome message is sent
 			['Antibot'] = 'off'
 		},
 		['antispam'] = {
 			['links'] = 'alwd',
+			['linkswp'] = 'alwd',
 			['forwards'] = 'alwd',
-			['warns'] = 2,
-			['action'] = 'ban'
+			['antipo'] = 'alwd', -- anti palavrões
+			['antico'] = 'alwd', -- anti comandos
+			['anticsujos']  = 'alwd', -- anti conteúdo sujo
+			['antiuser'] = 'alwd', -- anti usernames					
+			['warns'] = 15,
+			['action'] = 'mute'
 		},
 		['flood'] = {
 			['MaxFlood'] = 5,
@@ -114,6 +125,10 @@ return {
 		['goodbye'] = {
 			['type'] = 'custom',
 		},
+		['votekick'] = {
+			['quorum'] = 10,
+			['duration'] = 900,  -- 15 minutos
+		},	
 		['media'] = {
 			['photo'] = 'ok', --'notok' | image
 			['audio'] = 'ok',

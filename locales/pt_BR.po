@@ -33,18 +33,19 @@ msgid ""
 "convert this group to a supergroup.\n"
 msgstr ""
 "\n"
-"Olá macaquitos!\n"
-"Meu nome é %s, e fui feito para trabalhar como escravo enquanto os cornos betam pra trap.\n"
+"Olá a todos!\n"
+"Meu nome é %s, e eu sou um bot feito para ajudar os administradores em seu "
+"trabalho duro.\n"
 "Infelizmente não consigo trabalhar em grupos normais, peça ao criador do "
 "grupo para converter esse grupo em um supergrupo.\n"
 
 #: methods.lua:145
 msgid "I'm not an admin, I can't kick people"
-msgstr "Me da mod pra poder banir"
+msgstr "Não sou admin, não posso remover pessoas"
 
 #: methods.lua:147
 msgid "I can't kick or ban an admin"
-msgstr "Alá o cara pedindo pra banir outro mod"
+msgstr "Não posso kickar ou banir um administrador"
 
 #: methods.lua:149
 msgid "There is no need to unban in a normal group"
@@ -52,7 +53,7 @@ msgstr "Não há necessidade de desbanir num grupo comum"
 
 #: methods.lua:151
 msgid "This user is not a chat member"
-msgstr "Mano, esse cara nem ta no grupo"
+msgstr "Este usuário não é um membro do grupo"
 
 #: plugins/antispam.lua:57
 #, lua-format
@@ -63,6 +64,11 @@ msgstr "%s %s por <b>spam</b>! (%d/%d)"
 #, lua-format
 msgid "%s, this kind of spam is not allowed in this chat (<b>%d/%d</b>)"
 msgstr "%s, este tipo de mídia não é permitido nesse chat (<b>%d/%d</b>)"
+
+#: plugins/antispam.lua:60
+#, lua-format
+msgid "%s, spam is not allowed here. The next time you will be restricted"
+msgstr "%s, spam não é permitido aqui. A próxima vez que você mandar será punido."
 
 #: plugins/antispam.lua:62
 msgid "telegram.me link"
@@ -200,6 +206,57 @@ msgstr ""
 msgid "%d link(s) removed from the whitelist"
 msgstr "%d link(s) foi(foram) removidos da Lista de Permissões"
 
+#: voteban.lua:11
+msgid "🔘 Yes"
+msgstr "🔘 Sim"
+#: voteban.lua:12
+msgid "⚪️ No"
+msgstr "⚪️ Não"
+#: voteban.lua:15
+msgid "Revoke the vote"
+msgstr "Revogar o voto"
+#: voteban.lua:16
+msgid "Cancel the poll"
+msgstr "Cancelar a enquete"
+#: voteban.lua:16
+msgid "Who do you want to vote to get banned?"
+msgstr "Responda quem você quer que seja banido por votação!"
+
+#: voteban.lua:33
+msgid "ℹ This is _continuation_ of the previous poll."
+msgstr "ℹ Esta é _continuação_ da pesquisa anterior."
+#: voteban.lua:37
+#, lua-format
+msgid "%s suggests to ban himself. Ban him?\n"
+msgstr "%s sugere banir-se. Ban ele?\n"
+#: voteban.lua:39
+#, lua-format
+msgid "%s suggests to ban me. Do you really want to ban me? 😓\n"
+msgstr "%s sugere banir-me. Você realmente quer me banir? 😓 \n"
+#: voteban.lua:41
+#, lua-format
+msgid "%s suggests to ban %s. Ban him?\n"
+msgstr "%s sugere proibir %s. Ban ele? \n"
+
+#: voteban.lua:45
+#, lua-format
+msgid "🔨 %d users voted *for ban*."
+msgstr "🔨 %d usuários votaram * para proibição *."
+#: voteban.lua:46
+#, lua-format
+msgid "❎ %d users voted *against ban*."
+msgstr "❎ %d usuários votaram *contra a proibição*."
+#: voteban.lua:47
+#, lua-format
+msgid "❗ Requires additional %d users."
+msgstr "❗ Requer usuários adicionais de %d."
+#: voteban.lua:48
+#, lua-format
+msgid "🕒 The poll will be automatically closed in %d minutes"
+msgstr "🕒 A enquete será fechada automaticamente em %d minutos"
+
+
+
 #: plugins/backup.lua:87
 #, lua-format
 msgid ""
@@ -281,8 +338,9 @@ msgid ""
 "I can't kick this user.\n"
 "Either I'm not an admin, or the targeted user is!"
 msgstr ""
-"Não to conseguindo banir esse macaquito.\n"
-"Ou eu não tenho mod ou ele também é mod"
+"Eu não posso kickar este usuário.\n"
+"Provavelmente eu não sou um administrador, ou o usuário é um administrador "
+"do grupo!"
 
 #: plugins/banhammer.lua:140
 #, lua-format
@@ -310,12 +368,22 @@ msgstr "%s kickou %s!"
 #: plugins/banhammer.lua:172
 #, lua-format
 msgid "%s banned %s!"
-msgstr "%s baniu o gordão %s!"
+msgstr "%s baniu %s!"
 
 #: plugins/banhammer.lua:178
 #, lua-format
 msgid "%s unbanned by %s!"
 msgstr "%s desbanido por %s!"
+
+#: plugins/banhammer.lua:191
+#, lua-format
+msgid "%s Deleted from %s!"
+msgstr "%s Apagou de %s!"
+
+#: plugins/banhammer.lua:191
+#, lua-format
+msgid "%s muted from %s!"
+msgstr "%s Silenciou %s!"
 
 #: plugins/block.lua:64
 msgid ""
@@ -440,27 +508,27 @@ msgstr "Você não tem permissão para usar esse botão"
 
 #: plugins/configure.lua:31
 msgid "🛠 Menu"
-msgstr "🛠 Menu"
+msgstr "⚙️ Menu geral"
 
 #: plugins/configure.lua:32
 msgid "⚡️ Antiflood"
-msgstr "⚡️ Antiflood"
+msgstr "🛡 Anti-flood"
 
 #: plugins/configure.lua:33
 msgid "🌈 Media"
-msgstr "🌈 Midia"
+msgstr "📮 Anti-Conteúdos"
 
 #: plugins/configure.lua:34
 msgid "🚫 Antispam"
-msgstr "🚫 Antispam"
+msgstr "💸 Anti-spam"
 
 #: plugins/configure.lua:35
 msgid "📥 Log channel"
-msgstr "📥 Canal de Log"
+msgstr "📂 Canal de Log"
 
 #: plugins/configure.lua:41
 msgid "👔 Moderators"
-msgstr "👔 Moderadores"
+msgstr "👮‍♀️️ Moderadores"
 
 #: plugins/configure.lua:53
 #, lua-format
@@ -473,7 +541,7 @@ msgstr ""
 
 #: plugins/configure.lua:56
 msgid "_I've sent you the keyboard via private message_"
-msgstr "_Me da um oi no pv que já te passo_"
+msgstr "_Enviei para vocês os botões de configurações no privado_"
 
 #: plugins/configure.lua:68
 msgid "<i>Change the settings of your group</i>"
@@ -578,7 +646,7 @@ msgstr ""
 
 #: plugins/dashboard.lua:75
 msgid "_I've sent you the group dashboard via private message_"
-msgstr "_Te mandei no PV, da uma olhada lá_"
+msgstr "_Enviei para você o painel do grupo no privado_"
 
 #: plugins/dashboard.lua:90
 msgid "🚫 This group does not exist"
@@ -733,46 +801,12 @@ msgstr "🚫 [%s] não será ignorado pelo sistema anti-flood"
 
 #: plugins/help.lua:9
 #, lua-format
-msgid ""
-"\n"
-"Hello %s 👋🏼, nice to meet you!\n"
-"I'm Group Butler, the first administration bot using the official Bot API.\n"
-"\n"
-"*I can do a lot of cool stuffs*, here's a short list:\n"
-"• I can *kick or ban* users\n"
-"• You can use me to set the group rules\n"
-"• I have a flexible *anti-flood* system\n"
-"• I can *welcome new users* with a customizable message, or if you want with "
-"a gif or a sticker\n"
-"• I can *warn* users, and ban them when they reach the maximum number of "
-"warnings\n"
-"• I can also warn, kick or ban users when they post a specific media\n"
-"…and more, below you can find the \"all commands\" button to get the whole "
-"list!\n"
-"\n"
-"I work better if you add me to the group administrators (otherwise I won't "
-"be able to kick or ban)!\n"
-msgstr ""
-"\n"
-"Olá, %s 👋🏼, prazer em conhecê-lo!\n"
-"Eu sou o PDUrobot, sou um escravo digital preso no telegram. "
-"\n"
-"\n"
-"*Eu posso fazer um monte de coisas legais*, aqui está uma pequena lista:\n"
-"• Posso * kickar ou banir * usuários\n"
-"• Você pode me usar para definir as regras do grupo\n"
-"• Tenho um sistema flexível *anti-flood*\n"
-"• Posso *receber novos usuários* com uma mensagem personalizável, ou se você "
-"quiser, com um gif ou um sticker\n"
-"• Posso *advertir* os usuários e bani-los quando atingirem o número máximo "
-"de avisos\n"
-"• Eu também posso advertir, kickar ou banir os usuários quando eles postam "
-"uma mídia específica\n"
-"... e mais, abaixo você pode encontrar o botão \"todos os comandos\" para "
-"obter toda a lista!\n"
-"\n"
-"Eu trabalho melhor se você me adicionar aos administradores do grupo (caso "
-"contrário, eu não serei capaz de kickar ou banir)!\n"
+msgid "%s Welcome to the user menu"
+msgstr "%s Bem-vindo ao menu do usuário"
+
+#: plugins/help.lua:9
+msgid "*Select the command you want to learn*"
+msgstr "*Selecione o comando que você deseja aprender*"
 
 #: plugins/help.lua:25
 msgid ""
@@ -889,8 +923,81 @@ msgstr ""
 "\")."
 
 #: plugins/help.lua:62
-msgid "In this menu you will find all the available commands"
-msgstr "Neste menu você encontrará todos os comandos disponíveis"
+msgid "*In this menu you will find all the available commands*"
+msgstr "*Neste menu você encontrará todos os comandos disponíveis*"
+
+
+
+
+#: plugins/help.lua:viniiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+msgid "Source Code [Here] (https://github.com/viniciusvrc/Moderadorbot) \nService server Murkiriel \nCriador @viniciusvrc \n\nGod wants to help you believe and every day we can say: So far the Lord has helped us !."
+msgstr "Codigo fonte [Aqui](https://github.com/viniciusvrc/Moderadorbot)\nApoio server Murkiriel\nCriador @viniciusvrc\n\nDeus deseja te ajudar creia e a cada dia poderemos dizer: Até aqui o Senhor nos ajudou!."
+
+#: plugins/help.lua:vini
+msgid "*Administration Settings Command*\n\n*ATTENTION* THE MODERATOR will respond to your commands in your group as an *administrator*\nActivate MODERATOR as administrator gave your group before you start!\n\n- In your group send the command /menu or /config and make your settings of your group in private."
+msgstr "*Comando das Configurações de Administração*\n\n*ATENÇÃO*O MODERADOR responderá aos seus comandos no seu grupo como um *administrador *\nAtivar MODERADOR como o administrador deu ao seu grupo antes de começar! \n\n- No seu grupo, envie o comando /menu ou /config e faça as suas configurações do seu grupo em privado."
+
+#: plugins/help.lua:vini
+msgid "*Welcome Settings* tailored welcome message: Write after /welcome or /addboasvindas your welcome message. Example: /addboasvindas *Welcome $name* You can use some spaces reserved to include the name of users or id \n`$name` is the name of the state \n`$id`: will the Member id \n`$title` is the name of the group \n`$surname`: will be replaced by the last name of the user warning: $name, $surname and $title may not operate properly within the Markdown formatting."
+msgstr "*Configurações de boas-vindas*\nMensagem de boas-vindas personalizada:\nEscreva após /welcome ou /addboasvindas sua mensagem de boas-vindas.\nExemplo: /addboasvindas *Bem vindo $name*\n\nVocê pode usar alguns espaços reservados para incluir o nome de usuários ou id\n`$name`: será o nome do membro\n`$id`: será o id do membro\n`$title`: será o nome do grupo\n`$surname`: será substituído pelo sobrenome do usuário\nAviso: $name, $surname e $title podem não funcionar corretamente dentro da formatação markdown.\n\n*Você pode usar um GIF ou sticker como mensagem de boas-vindas.*\n- Para configurá-lo, responda ao GIF ou sticker que você deseja definir como mensagem de boas-vindas com /welcome ou /addboasvindas."
+
+#: plugins/help.lua:vini
+msgid "*goodbye Settings* tailored goodbye message: Write after your goodbye message. Example: /goodbye *Welcome $name* You can use some spaces reserved to include the name of users or id \n`$name` is the name of the state \n`$id`: will the Member id \n`$title` is the name of the group \n`$surname`: will be replaced by the last name of the user warning: $name, $surname and $title may not operate properly within the Markdown formatting"
+msgstr "*Configurações de Despedida*\nMensagem de Despedida personalizada:\nEscreva após /goodbye sua mensagem de goodbye.\nExemplo: /goodbye *Bem vindo $name*\n\nVocê pode usar alguns espaços reservados para incluir o nome de usuários ou id\n`$name`: será o nome do membro\n`$id`: será o id do membro\n`$title`: será o nome do grupo\n`$surname`: será substituído pelo sobrenome do usuário\nAviso: $name, $surname e $title podem não funcionar corretamente dentro da formatação markdown.\n\n*Você pode usar um GIF ou sticker como mensagem de boas-vindas.*\n- Para configurá-lo, responda ao GIF ou sticker que você deseja definir como mensagem de goodbye com /goodbye."
+
+#: plugins/help.lua:vini
+msgid "*Send* /kick *as answers to only remove the user from the group*"
+msgstr "*Envie* /kick *como respostas para somente remover do grupo*"
+
+#: plugins/help.lua:vini
+msgid "*Send* /ban *as answers to only banishment the user from the group*"
+msgstr "*Envie* /ban *como respostas para somente remover do grupo*"
+
+#: plugins/help.lua:vini
+msgid "*Send* /mute *as answers to only mute the user from the group*"
+msgstr "*Envie* /mute *como respostas para somente remover do grupo*"
+
+#: plugins/help.lua:vini
+msgid "*Send* /del *as answers to only delete the user from the group*"
+msgstr "*Envie* /del *como respostas para somente remover do grupo*"
+
+#: plugins/help.lua:vini
+msgid "*Open vote to ban* Send the command /voteban responding to the user so that he is voted"
+msgstr "*Abrir votação para banir*\n Envie o comando /voteban respondendo o usuário para que ele seja votado"
+
+#: plugins/help.lua:vini
+msgid "*Add rules to your group* Send the command /addregras or /setrules with a text after the command."
+msgstr "*Adicione regras ao seu grupo*\nEnvie o comando /addregras ou /setrules com um texto após o comando."
+
+#: plugins/help.lua:vini
+msgid "*Create extra commands* send the command /addcomando `/test` `text` /Addcomando or /beds *Create* /delcomando command or /extradel *Deletes the command* /listacomando or /extralist *Displays a list of commands* *Commands With Gif or Sticker* reply with the command /addcomando or /beds *GIF* or *STICKER*"
+msgstr "*Crie comandos extras*\nEnvie o comando /addcomando `/test` `text` \n\n/Addcomando ou /extra *Cria comando*\n/delcomando ou /extradel *Apaga o comando*\n/listacomando ou /extralist *Exibe a lista de comandos*\n\n*Comandos com Gif ou Sticker*\nRespondas com o comando /addcomando ou /extra o *GIF* ou *STICKER*"
+
+#: plugins/help.lua:vini
+msgid "*Displays the list of Administrators* Send within your group /adminlist or /listadmin to rehearse the List Administrators group."
+msgstr "*Exibe a lista de Administradores*\nEnvie dentro de seu grupo /adminlist ou /listadmin para visualisar a lista de administradores do grupo."
+
+#: plugins/help.lua:vini
+msgid "*Send* /chatbot within your group to connect /or on /off to turn the conversation *Artificial Intelligence*"
+msgstr "*Envie* /chatbot dentro de seu grupo para ligar /on ou /off para desligar a conversa *Inteligencia artifical*"
+
+#: plugins/help.lua:vini
+msgid "*Send* /ping *to check the response time between the bot and the server telegrams*"
+msgstr "*Envie* /ping  *para verificar o tempo de resposta entre o bot e o servidor Telegram*"
+
+
+#: plugins/help.lua:vini
+msgid "List-admin"
+msgstr "Lista Amdministradores"
+
+#: plugins/help.lua:vini
+msgid "Vote-ban"
+msgstr "Votação ban"
+#: plugins/help.lua:vini
+msgid "🔙 Main menu"
+msgstr "🔙 Menu principal"
+
+
 
 #: plugins/help.lua:64
 msgid ""
@@ -1651,17 +1758,33 @@ msgstr "Configurações de boas-vindas"
 msgid "Links whitelist"
 msgstr "Lista de Permissões"
 
-#: plugins/help.lua:345
-msgid "📢 Bot channel"
-msgstr "📢 Canal do Bot"
+#: plugins/help.lua:513
+msgid "⛑ Admin Tutorial"
+msgstr "⛑ Tutorial Comandos"
+
+#: plugins/help.lua:516
+msgid "♻ Comands"
+msgstr "♻ Comandos"
+
+#: plugins/help.lua:517
+msgid "🌍 Language"
+msgstr "🌍 Idiomas"
 
 #: plugins/help.lua:346
-msgid "🌍 Select your language"
-msgstr "🌍 Selecione o seu idioma"
+msgid "🕹 supports"
+msgstr "🕹 Oficina de bots"
 
-#: plugins/help.lua:349
-msgid "📕 All the commands"
-msgstr "📕 Todos os comandos"
+#: plugins/help.lua:520
+msgid "👮‍ Moderation"
+msgstr "👮‍ Canal infor"
+
+#: plugins/help.lua:521
+msgid "💡 About"
+msgstr "💡 Sobre"
+
+#: plugins/help.lua:521
+msgid "📲 Add to a group"
+msgstr "📲 adicionar em um grupo"
 
 #: plugins/help.lua:358
 msgid "Basics"
@@ -1777,6 +1900,10 @@ msgid ""
 msgstr ""
 "O link foi atualizado.\n"
 "*Aqui está o novo link*: %s"
+
+#: plugins/links.lua:24
+msgid "First message"
+msgstr "Primeira Mensagem"
 
 #: plugins/logchannel.lua:9
 msgid "Log every time an user join the group"
@@ -2377,12 +2504,12 @@ msgstr ""
 #: plugins/onmessage.lua:92
 #, lua-format
 msgid "%s <b>banned</b> for flood!"
-msgstr "Macaco %s foi <b>banido</b> por flood!"
+msgstr "%s foi <b>banido</b> por flood!"
 
 #: plugins/onmessage.lua:94
 #, lua-format
 msgid "%s <b>kicked</b> for flood!"
-msgstr "Macaco %s foi <b>kickado</b> por flood!"
+msgstr " %s foi <b>kickado</b> por flood!"
 
 #: plugins/onmessage.lua:137
 #, lua-format
@@ -2390,7 +2517,7 @@ msgid ""
 "%s <b>banned</b>: media sent not allowed!\n"
 "❗️ <code>%d/%d</code>"
 msgstr ""
-"%s foi <b>banido</b>: mandando conteúdo proibido neste recinto!\n"
+"%s foi <b>banido</b>: envio de mídia proibida!\n"
 "❗️ <code>%d/%d</code>"
 
 #: plugins/onmessage.lua:139
@@ -2399,7 +2526,7 @@ msgid ""
 "%s <b>kicked</b>: media sent not allowed!\n"
 "❗️ <code>%d/%d</code>"
 msgstr ""
-"%s foi <b>kickado</b>: mandando conteúdo proibido neste recinto!\n"
+"%s foi <b>kickado</b>: envio de mídia proibida!\n"
 "❗️ <code>%d/%d</code>"
 
 #: plugins/onmessage.lua:144
@@ -2428,12 +2555,12 @@ msgstr ""
 #: plugins/onmessage.lua:190
 #, lua-format
 msgid "%s <b>kicked</b>: arab/persian message detected!"
-msgstr "%s foi <b>kickado</b>: selo anti-terrorismo!"
+msgstr "%s foi <b>kickado</b>: mensagem árabe ou persa detectado!"
 
 #: plugins/onmessage.lua:192
 #, lua-format
 msgid "%s <b>banned</b>: arab/persian message detected!"
-msgstr "%s foi <b>banido</b>: selo anti-terrorismo!"
+msgstr "%s foi <b>banido</b>: mensagem árabe ou persa detectado!"
 
 #: plugins/pin.lua:14
 msgid "Last message generated by `/pin` ^"
@@ -2495,10 +2622,11 @@ msgid ""
 "Bot version: `%s`\n"
 "*Some useful links:*"
 msgstr ""
-"Este bot é baseado no GroupButler que se baseia no Otouto \n"
-"O PDUrobot não existiria sem eles.\n"
+"Este bot se baseia em [otouto](https://github.com/topkecleon/otouto) (AKA @ "
+"mokubot, canal: @otouto), um bot multiuso por Lua\n"
+"O Group Butler não existiria sem ele.\n"
 "\n"
-"O proprietário deste bot é @matheus_bach, não mande mensagem privada pra ele: use "
+"O proprietário deste bot é @bac0nnn, não mande mensagem privada pra ele: use "
 "o comando /groups em vez disso.\n"
 "\n"
 "Versão do bot:  `%s`\n"
@@ -2599,7 +2727,7 @@ msgid ""
 "_Please, do not abuse this command. It can be used twice every 20 minutes_.\n"
 "Wait other %d minutes, %d seconds."
 msgstr ""
-"_X9 morre cedo, não abuse dos comandos. Ele só pode ser usado 2 vezes a cada 20 "
+"_Por favor, não abuse dos comandos. Ele só pode ser usado 2 vezes a cada 20 "
 "minutos_.\n"
 "Espere %d minuto(s), %d segundo(s)."
 
@@ -2650,9 +2778,9 @@ msgid ""
 "My name is %s, and I'm a bot made to help administrators in their hard "
 "work.\n"
 msgstr ""
-"Olá macaquitos!\n"
-"Meu eu sou o %s, trabalho como escravo no telegram "
-"enquanto mod beta pra trap.\n"
+"Olá a todos!\n"
+"Meu nome é %s, e eu sou um bot feito para ajudar os administradores em seu "
+"trabalho duro.\n"
 
 #: plugins/service.lua:42
 msgid ""
@@ -2690,8 +2818,72 @@ msgstr ""
 "Note que os tradutores são apenas voluntários, e algumas strings da tradução "
 "que você selecionou _podem não ter sido traduzidas ainda_"
 
+#: plugins/destaques.lua:vini
+msgid "📢 Spread Group 📢"
+msgstr "📢 Divulgar Grupo 📢"
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "*DISCLOSURE MODERADOR 🇧🇷*\n*============*\n📌Status: `Em Espera..`\n⌛Temp: `%s`\n👥Administrators: `%d` \n"
+msgstr "*DIVULGAÇÃO MODERADOR 🇧🇷*\n*============*\n📌Status: `Em Espera..`\n⌛Tempo: `%s`\n👥Administradores: `%d` \n"
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "%s Only groups * Public* can be @Destaques .."
+msgstr "%s Somente grupos *Público* pode ser divulgado nos @Destaques .."
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "You can post after 10 minutes ( %d Seconds remaining)"
+msgstr "Você poderá divulgar após ( %d Segundos restantes)"
+
+#: plugins/destaques.lua:163
+#, lua-format
+msgid "*DISCLOSURE MODERADOR 🇧🇷*\n*============*\n📌Status: `Group Disclosed..`\n⌛Temp: `%s`\n👥Administrators: `%d`\n🎯Posted in: @Destaques\n🗣Featured by: `%s`\n🔍Featured Link: [Consult](https://t.me/joinchat/AAAAAE892f-P5Qg8SveC2w)\n"
+msgstr "*DIVULGAÇÃO MODERADOR 🇧🇷*\n*============*\n📌Status: `Grupo Divulgado..`\n⌛Tempo: `%s`\n👥Administradores: `%d`\n🎯Divulgado em: @Destaques\n🗣Destacado por: `%s`\n🔍Link do destaque: [Consultar](https://t.me/joinchat/AAAAAE892f-P5Qg8SveC2w)\n"
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "✅ You can disclose after %s"
+msgstr "✅ Você pode divulgar após %s"
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "*F E A T U R E D - MODERADOR 🇧🇷*\n\n*GROUP*\n[%s](%s)\n*POSTED BY*\n%s\n*LANGUAGE*\nInglês"
+msgstr "*D E S T A Q U E - MODERADOR 🇧🇷*\n\n*GRUPO*\n[%s](%s)\n*POSTADO POR*\n%s\n*IDIOMA*\nPortuguês"
+
+#: plugins/destaques.lua:vini
+msgid "*DISCLOSURE MODERADOR 🇧🇷*\n\n*ATTENTION*\nBe careful that your message is not misunderstood or aggressive. Any irregularity @Moderadorbot will no longer answer you permanently.\n\n*Send the command* /comentar *with a little sentence ...*"
+msgstr "* DIVULGAÇÃO MODERADOR 🇧🇷*\n\n*ATENÇÃO*\nCuidado para que sua mensagem não seja mal entendida ou agressiva. Qualquer irregularidade @Moderadorbot não irá mais lhe responder permanentemente.\n\n*Envie o comando */comentar *com uma pequena Deste grupo para ser postado nos Destaques ...*"
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "*wait a few seconds*\n⌛Temp total: `%d` Seconds"
+msgstr "*Aguarde alguns segundos *\n⌛Tempo total: `%d` segundos"
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "*F E A T U R E D - MODERADOR 🇧🇷*\n\n*GROUP*\n[%s](%s)\n*POSTED BY*\n[%s](%s)\n*COMMENT*\n`%s`"
+msgstr "*D E S T A Q U E - MODERADOR 🇧🇷*\n\n*GRUPO*\n[%s](%s)\n*POSTADO POR *\n[%s](%s)\n*COMENTÁRIO*\n`%s`"
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "'*DISCLOSURE MODERADOR 🇧🇷*\n*============*\n📌Status: `Comentario postado`\n*POSTED BY*\n[%s](%s)\n*COMMENT*\n\n`%s`"
+msgstr "*DIVULGAÇÃO MODERADOR 🇧🇷*\n*============*\n📌Status: `Comentario postado`\n*POSTADO POR*\n[%s](%s)\n*COMENTÁRIO*\n\n`%s`"
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "*F E A T U R E D - MODERADOR 🇧🇷*\n\n*CHANNEL*\n[%s](%s)\n*POSTED BY*\n%s\n*LANGUAGE*\nInglês"
+msgstr "*D E S T A Q U E - MODERADOR 🇧🇷*\n\n*CANAL*\n[%s](%s)\n*POSTADO POR*\n%s \n*IDIOMA*\nPortuguês"
+
+#: plugins/destaques.lua:vini
+#, lua-format
+msgid "*DISCLOSURE MODERADOR 🇧🇷*\n*============*\n📌Status: `channel Disclosed...`\n⌛Temp: `15m`\n🎯Posted in: @Destaques\n🗣Featured by: `%s`\n🔍Featured Link: [Consult](https://t.me/joinchat/AAAAAE892f-P5Qg8SveC2w)\nHow to advertise channel\n*1* - `Send in your channel`. *@Destaques*\n*2* - `Forward to your group where the @moderadorbot and administrator`"
+msgstr "*DIVULGAÇÃO MODERADOR 🇧🇷*\n*============*\n📌Status: `Canal Divulgado ...`\n⌛Tempo: `15m` \n🎯Divulgado em: @Destaques \n🗣Destacado por: `%s` \n🔍Link do destaque: [Consultar](https://t.me/joinchat/AAAAAE892f-P5Qg8SveC2w)\n*Como divulgar seu canal?*\n*1* - `Envie em seu canal`. *@destaques*\n*2* - `Encaminhe do seu canal para o seu grupo onde o @moderadorbot esta como administrador`"
+
+
 #: plugins/users.lua:20
-msgid "🔄️ Refresh cache"
+msgid ""
 msgstr "🔄️ Atualizar cache"
 
 #: plugins/users.lua:72

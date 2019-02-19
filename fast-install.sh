@@ -6,7 +6,10 @@ sudo apt-get upgrade
 
 sudo apt-get install libreadline-dev libssl-dev lua5.2 liblua5.2-dev git make unzip redis-server curl libcurl4-gnutls-dev -y
 
-git clone https://github.com/matheusbach/PDUrobot
+ps -ef | grep bot | grep -v grep | awk '{print $2}' | xargs kill -9
+killall lua
+
+git clone -b master --single-branch https://github.com/matheusbach/PDUrobot.git
 
 sudo chmod -R 755 *
 

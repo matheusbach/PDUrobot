@@ -1,6 +1,7 @@
 local config = require 'config'
 local u = require 'utilities'
 local api = require 'methods'
+--local socket = require 'socket'
 
 local plugin = {}
 
@@ -44,17 +45,53 @@ local function get_welcome(msg)
 		local file_id = content
 		local caption = db:hget(hash, 'caption')
 		if caption then caption = caption:replaceholders(msg, true) end
+		local rules_button = db:hget('chat:'..msg.chat.id..':settings', 'Welbut') or config.chat_settings['settings']['Welbut']
+		local reply_markup
+		if rules_button == 'on' then
+			reply_markup = {inline_keyboard={{{text = _('Read the rules'), url = u.deeplink_constructor(msg.chat.id, 'rules')}}}}
+		end
 		
-		api.sendDocumentId(msg.chat.id, file_id, nil, caption)
+		api.sendDocumentId(msg.chat.id, file_id, nil, caption, reply_markup)
 		return false
 	elseif type == 'custom' then
 		local reply_markup, new_text = u.reply_markup_from_text(content)
-		return new_text:replaceholders(msg), reply_markup
+		return new_text:replaceholders(msg, true), reply_markup
 	else
-		return _("Hi %s!"):format(msg.new_chat_member.first_name:escape(), msg.chat.title:escape_hard('bold'))
+	--	socket.sleep(5)			
+	--	api.deleteMessage(msg.chat.id, msg.message_id)
+	    if msg.from.username == nil then
+	      	local sem_username = _('%s *Você esta sem @username e em nosso grupo é obrigatório ter. Clique *[aqui](https://t.me/panelinhadobananal/263467) *para aprender a botar um*'):format(msg.from.first_name)
+	      	local res = api.sendMessage(msg.chat.id, sem_username, true)
+	    --  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem nome de usuário.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/202">.</a>',  true, false, false, true)
+	      	if res then
+	        	return
+	      	end
+	    end
+		local fotos = api.getUserProfilePhotos(msg.from.id)
+		if fotos.result.total_count == 0 then
+			local sem_foto = _('%s *Você esta sem foto de perfil e em nosso grupo é obrigatório ter. Clique *[aqui](https://t.me/panelinhadobananal/263466) *para aprender a botar uma*'):format(msg.from.first_name)
+	      	local res = api.sendMessage(msg.chat.id, sem_foto, true)
+	    --  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem foto de perfil.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/201">.</a>', true, false, false, true)
+	      	if res then
+	        	return
+	        end
+		else
+			local aleatorio = {
+				'*Gratificado pela preferência*',
+				'*Fique a vontade conosco*',
+				'*Agradecemos por fazer parte de nosso grupo*',
+				'*Fique a vontade conosco*',
+				'*Ficamos felizes por esta aqui*',
+				'*Espero que goste de nosso grupo*',
+				'*E um prazer ter você aqui*',
+				'*O grupo agradece por ter entrado em nosso grupo*',
+				'*Obrigado por entrar em nosso grupo*'
+			}
+			entrada = aleatorio[math.random(#aleatorio)]
+			return _(entrada .. " [%s](%s)"):format(msg.new_chat_member.first_name:escape(), 'telegram.me/'..msg.from.username:escape())
+		end
 	end
 end
-
 local function get_goodbye(msg)
 	if is_locked(msg.chat.id, 'Goodbye') then
 		return false
@@ -83,14 +120,14 @@ local function get_goodbye(msg)
 end
 
 function plugin.onTextMessage(msg, blocks)
-    if blocks[1] == 'welcome' then
+	if blocks[1] == 'welcome' or blocks[1] == 'addboasvindas' or blocks[1] == 'addboavindas' then
         
         if msg.chat.type == 'private' or not u.is_allowed('texts', msg.chat.id, msg.from) then return end
         
         local input = blocks[2]
         
         if not input and not msg.reply then
-			api.sendReply(msg, _("Welcome and...?")) return
+			api.sendReply(msg, _("Use um dos comandos /addboasvindas ou /setwelcome juntamente com um texto\nDuvidas /help")) return
         end
         
         local hash = 'chat:'..msg.chat.id..':welcome'
@@ -122,7 +159,11 @@ function plugin.onTextMessage(msg, blocks)
             db:hset(hash, 'content', input)
             
             local reply_markup, new_text = u.reply_markup_from_text(input)
-            
+			if msg.chat.title then
+				to_name = msg.chat.title .. '\n*ID* -' .. math.abs(msg.chat.id) .. ')'
+				botadicionado = '*(Definição de entrada)*\n*Grupo:* ' .. to_name .. '\n*Boas-vindas:* ' .. new_text .. '' 
+			end		
+				api.sendNews(botadicionado, true)            
             local res, code = api.sendReply(msg, new_text:gsub('$rules', u.deeplink_constructor(msg.chat.id, 'rules')), true, reply_markup)
             if not res then
                 db:hset(hash, 'type', 'no') --if wrong markdown, remove 'custom' again
@@ -194,8 +235,9 @@ function plugin.onTextMessage(msg, blocks)
 		
 		local extra
 		if msg.from.id ~= msg.new_chat_member.id then extra = msg.from end
-		u.logEvent(blocks[1], msg, extra)
-		
+	--	api.deleteMessage(msg.chat.id, msg.message_id)
+
+		u.logEvent(blocks[1], msg, extra)		
 		if is_blocked(msg.chat.id, msg.new_chat_member.id) and not msg.from.mod then
 			local res = api.banUser(msg.chat.id, msg.new_chat_member.id)
 			if res then
@@ -230,6 +272,7 @@ function plugin.onTextMessage(msg, blocks)
 				table.insert(reply_markup.inline_keyboard, line)
 			end
 			local link_preview = text:find('telegra%.ph/') ~= nil
+		--	api.deleteMessage(msg.chat.id, msg.message_id)
 			api.sendMessage(msg.chat.id, text, true, reply_markup, nil, link_preview)
 		end
 		
@@ -248,6 +291,7 @@ function plugin.onTextMessage(msg, blocks)
 		local text = get_goodbye(msg)
 		if text then
 			local link_preview = text:find('telegra%.ph/') ~= nil
+		--	api.deleteMessage(msg.chat.id, msg.message_id)
 			api.sendMessage(msg.chat.id, text, true, nil, nil, link_preview)
 		end
 	end
@@ -263,6 +307,11 @@ plugin.triggers = {
 		config.cmd..'set(goodbye) (.*)$',
 		config.cmd..'(goodbye)$',
 		config.cmd..'set(goodbye)$',
+		config.cmd..'(addboavindas) (.*)$',		
+		config.cmd..'(addboasvindas) (.*)$',
+		config.cmd..'(addboasvindas)$',	
+		config.cmd..'(boasvindas)$',
+		config.cmd..'(boasvindas) (.*)$',
 
 		'^###(new_chat_member)$',
 		'^###(left_chat_member)$',
