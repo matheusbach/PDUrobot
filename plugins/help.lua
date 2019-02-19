@@ -7,19 +7,20 @@ local plugin = {}
 local function get_helped_string(key)
 	if key == 'start' then
 		return _([[
-Hello %s 👋🏼, nice to meet you!
-I'm Group Butler, the first administration bot using the official Bot API.
+Olá %s
+Eu sou PDUrobot, um escravo virtual acorrentado no telegram e feito para proteger seus queridos grupos enquanto os moderadores cornos betam pra trap
 
-*I can do a lot of cool stuffs*, here's a short list:
-• I can *kick or ban* users
-• You can use me to set the group rules
-• I have a flexible *anti-flood* system
-• I can *welcome new users* with a customizable message, or if you want with a gif or a sticker
-• I can *warn* users, and ban them when they reach the maximum number of warnings
-• I can also warn, kick or ban users when they post a specific media
-…and more, below you can find the "all commands" button to get the whole list!
+Eu tenho um monte de funções, por exemplo:
+• Kickar e banir membros
+• Posso memorizar e falar as regras do grupo
+• Tenho um sistema flexível de antiflood, antispam e anti conteúdos indesejados
+• Eu posso dar as boas vindas para cada membro que entra e já lhe apresentar as regras
+• Posso alertar membros sem username ou foto
+• Posso advertir membros como uma espécie de cartão amarelo
 
-I work better if you add me to the group administrators (otherwise I won't be able to kick or ban)!
+Bem... veja todos os comando clicando no botão "comandos" abaixo
+
+Eu funciono melhor se eu for administrador/moderador do grupo (de preferência em supergrupos)
 ]])
 	elseif key == 'realm' then
 		return _([[*Realm commands*
@@ -59,7 +60,7 @@ You can use `/, ! or #` to trigger a command.
 
 Remember: you have to use commands  *in the group*, unless they are specifically designed for private chats (see "private" tab).]])
 	elseif key == 'main_menu' then
-		return _("In this menu you will find all the available commands")
+		return _("Aqui você encontra os comandos disponíveis")
 	elseif key == 'private' then
 		return _([[
 *Commands that work in private*:
@@ -74,20 +75,21 @@ Remember: you have to use commands  *in the group*, unless they are specifically
 ]])
 	elseif key == 'users_group' then
 		return _([[
-*Commands available for every user in a group*:
+* Comandos disponíveis para todos os usuários em um grupo *:
 
-• `/dashboard`: see all the informations about the group
-• `/rules`: show the group rules
-• `/adminlist`: show the administrators of the group
-• `/modlist`: show the moderators of the group
-• `/staff`: show the list of the administrators and moderators
-• `/help`: receive the help message
-• `!kickme`: the bot will kick you
-*Note*: `/dashboard`, `/adminlist`, `/modlist` and `/staff`replies always in private. If the bot is unable to reach an user, he will ask in the group to that user to be started, but just if _silent mode_ is off.
-With `/rules`, the bot always answer in the group for admins, but with normal users the message is sent in the group or in private according to the group settings.
+• `/dashboard`: veja todas as informações sobre o grupo
+• `/rules`: mostra as regras do grupo
+• `/adminlist`: mostra os administradores do grupo
+• `/modlist`: mostra os moderadores do grupo
+• `/staff`: mostra a lista dos administradores e moderadores
+• `/help`: recebe a mensagem de ajuda
+• `/quero_cp`: o bot vai te kickar
 
-• `@admin` (by reply): report a message to the admins of the group (the bot will forward it in prvate). This ability could be turned off from the group settings. A description of the report can be added.
-Admins need to give their consense to receive reports from users, with `/mysettings` command
+* Nota *: `/dashboard`,` /adminlist`, `/modlist` e` /staff` são respondidos sempre em privado. Se o bot não conseguir acessar um usuário, ele pedirá ao grupo que inicie o usuário, mas apenas se _silent mode_ estiver desativado.
+Com `/rules`, o bot sempre responde no grupo por admins, mas com usuários normais a mensagem é enviada no grupo ou em privado de acordo com as configurações do grupo.
+
+• `@admin` (por resposta): relata uma mensagem para os administradores do grupo (o bot irá encaminhá-lo em prvate). Essa habilidade pode ser desativada nas configurações do grupo. Uma descrição do relatório pode ser adicionada.
+Os administradores precisam dar seu consenso para receber relatórios de usuários, com o comando `/mysettings`
 ]])
 	elseif key == 'info' then
 		return _([[
@@ -250,40 +252,40 @@ When Rtl is not allowed (🚫), everyone that writes this character (or that has
 ]])
 	elseif key == 'config' then
 		return _([[
-*General group settings*
+		* Configurações gerais do grupo *
 
-`/config` or  `/settings`: manage the group settings in private from an inline keyboard.
-The inline keyboard has six sub-menus:
-
-*Menu*: manage the most important group settings
-*Antiflood*: turn on or off the antiflood, set its sensitivity and choose some media to ignore, if you want
-*Media*: choose which media to forbid in your group, and set the number of times that an user will be warned before being kicked/banned
-*Antispam*: choose which kind of spam you want to forbid (example: telegram.me links, forwarded messages from channels)
-*Log channel*: choose which updates should be logged
-*Moderators*: promote or demote moderators
-
-*Bonus commands*:
-`/reportflood [number of messages]/[timeframe]`: set how many times users can use the @admin command within a certain timeframe.
-`/leave`: the bot will leave the group without deleting its data. Use this command only if you are going to add the bot to the group again
-`/snap`: generate a backup file that can be restored with `/import` (send the file in the group and reply to it). `/snap` can be used once every three days
+`/config` ou` /settings`: gerencia as configurações do grupo em particular a partir de um teclado embutido.
+			
+* Menu *: gerenciar as configurações mais importantes do grupo
+* Antiflood *: liga ou desliga o antiflood, define a sua sensibilidade e escolhe alguns media para ignorar, se quiser
+* Mídia *: escolha qual mídia proibir no seu grupo e defina o número de vezes que um usuário será avisado antes de ser expulso / banido
+* Antispam *: escolha qual tipo de spam você deseja proibir (exemplo: links de telegram, mensagens encaminhadas de canais)	
+* Canal de Log *: escolha quais atualizações devem ser registradas em um canal de log
+* Moderadores *: promovem ou rebaixam os moderadores
+		
+* Comandos de bônus *:
+`/reportflood [mensagens] / [timeframe]`: define quantas vezes os usuários podem usar o comando @admin dentro de um determinado período de tempo.
+`/snap`: gera um arquivo de backup que pode ser restaurado com` /import` (envia o arquivo para o grupo e responde a ele). `/snap` pode ser usado uma vez a cada três dias
 ]])
 	elseif key == 'mods' then
 		return _([[*Moderators*
 
-Moderators are normal users that can use some of the commands that are usually available only to the group administrators.
+		Os moderadores são usuários normais que podem usar alguns dos comandos que estão geralmente disponíveis apenas para os administradores do grupo.
 
-By default, moderators only have the banhammer (they can use _/ban, /kick, /unban, /tempban, /warn, /nowarn, /block, /unblock, /user_).
-But their powers can be expanded or restricted by the administrators: there is a button in the /config menu, called _"Moderators"_, where the permissions of the moderators can be configured.
+Por padrão, os moderadores só têm o banhammer(they can use _/ban, /kick, /unban, /tempban, /warn, /nowarn, /block, /unblock, /user_).
+Mas seus poderes podem ser expandidos ou restritos pelos administradores: existe um botão no menu / config, chamado "Moderadores", onde as permissões dos moderadores podem ser configuradas.
 
-By default, every admin can promote a new moderator, or demote an user who is already a mod.
-If you are the group owner, in the _"Moderators"_ section of the configuration menu you will be able to find a switch called _"Admins can manage mods"_.
-When disabled, the group administrators *can't promote or demote new moderators*, and also they won't be allowed to access the _"Moderators"_ section of the configuration menu (so they *won't be able to change the moderators permissions*).
+Por padrão, todo administrador pode promover um novo moderador ou rebaixar um usuário que já é um mod.
+Se você é o proprietário do grupo, na seção "Moderadores" do menu de configuração, você encontrará uma opção chamada "Os administradores podem gerenciar mods".
+Quando desativado, os administradores do grupo não podem promover ou rebaixar novos moderadores, e também não terão permissão para acessar a seção "Moderadores" do menu de configuração (para que eles não possam alterar as permissões dos moderadores).
 
-*Commands*
-`/promote [by reply|by username|by text mention|by ID]`: promote an user to moderator. If used on a moderator, it will update his name in the moderators list.
-`/demote [by reply|by username|by text mention|by ID]`: demote an moderator.
-`/modlist`: show the list of the moderators
-`/modlist -`: demote all the moderators (will clean the modlist)]])
+*Comandos:*
+`/promote` [por resposta | por nome de usuário | por menção de texto | por ID]: promover um usuário ao moderador. Se usado em um moderador, ele atualizará seu nome na lista de moderadores.
+`/demote` [por resposta | por nome de usuário | por menção de texto | por ID]: rebaixar um moderador.
+`/modlist` mostra a lista dos moderadores
+`/modlist -` rebaixar todos os moderadores (vai limpar a modlist)
+]])
+
 	elseif key == 'logchannel' then
 		return _([[*Log channel informations*
 			
@@ -346,11 +348,10 @@ local function do_keyboard_private()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    	    {text = _("📢 Bot channel"), url = 'https://telegram.me/'..config.channel:gsub('@', '')},
-    		{text = _("🌍 Select your language"), callback_data = 'selectlang'},
+    	    {text = _("📢 Canal do Bananal"), url = 't.me/canaldobananal'},
 	    },
 	    {
-	        {text = _("📕 All the commands"), callback_data = 'help:back'}
+			{text = _("📕 Comandos"), callback_data = 'help:back'}
         }
     }
     return keyboard

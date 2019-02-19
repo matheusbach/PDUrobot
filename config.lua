@@ -6,7 +6,7 @@ return {
 	grupo_bot = 'https://t.me/joinchat/?',	
 	canal_bot = 'https://t.me/?',
 	nome_bot = 'PDUbetaBot',
-	channel = '@?',
+	channel = '@canaldobananal',
 	lang = 'pt_BR',
 	cmd = '^[/!#]',
 	db = 0,
