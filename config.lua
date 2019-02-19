@@ -1,11 +1,11 @@
 return {
-	Token = "564676924:AAFvBaP9ceyLxu22VrvqyuSW9vRy3lPeL_A",
+	Token = "592305753:AAFG1b_9LuP5YVjKE-207Q5A7Ve-3YW-k4s",
 	allowed_updates = {"message", "edited_message", "callback_query"},
 	human_readable_version = '2.0',
 	source_code = 'https://github.com/matheusbach/PDUrobot',
 	grupo_bot = 'https://t.me/joinchat/?',	
 	canal_bot = 'https://t.me/?',
-	nome_bot = 'PDUbetaBot',
+	nome_bot = 'PDUrobot',
 	channel = '@canaldobananal',
 	lang = 'pt_BR',
 	cmd = '^[/!#]',
@@ -80,7 +80,7 @@ return {
 			['Silent'] = 'off',
 			['Rules'] = 'on',
 			['Reports'] = 'on',
-			['Welbut'] = 'off', -- "read the rules" button under the welcome message
+			['Welbut'] = 'on', -- "read the rules" button under the welcome message
 			['User votekick'] = 'on',
 			['Weldelchain'] = 'on', -- delete the previously sent welcome message when a new welcome message is sent
 			['Antibot'] = 'off'
