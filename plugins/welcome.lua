@@ -41,6 +41,19 @@ local function get_welcome(msg)
 	local hash = 'chat:'..msg.chat.id..':welcome'
 	local type = (db:hget(hash, 'type')) or config.chat_settings['welcome']['type']
 	local content = (db:hget(hash, 'content')) or config.chat_settings['welcome']['content']
+
+	if msg.from.username == nil then
+	local sem_username = _('%s *Você esta sem @username e em nosso grupo é obrigatório ter. Clique *[aqui](https://t.me/panelinhadobananal/263467) *para aprender a botar um*'):format(msg.from.first_name)
+	local res = api.sendMessage(msg.chat.id, sem_username, true)
+--  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem nome de usuário.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/202">.</a>',  true, false, false, true)
+
+	local fotos = api.getUserProfilePhotos(msg.from.id)
+	if fotos.result.total_count == 0 then
+    local sem_foto = _('%s *Você esta sem foto de perfil e em nosso grupo é obrigatório ter. Clique *[aqui](https://t.me/panelinhadobananal/263466) *para aprender a botar uma*'):format(msg.from.first_name)
+	local res = api.sendMessage(msg.chat.id, sem_foto, true)
+--  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem foto de perfil.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/201">.</a>', true, false, false, true)
+
+
 	if type == 'media' then
 		local file_id = content
 		local caption = db:hget(hash, 'caption')
@@ -56,37 +69,19 @@ local function get_welcome(msg)
 	elseif type == 'custom' then
 		local reply_markup, new_text = u.reply_markup_from_text(content)
 		return new_text:replaceholders(msg, true), reply_markup
+
 	else
-	--	socket.sleep(5)			
-	--	api.deleteMessage(msg.chat.id, msg.message_id)
-	    if msg.from.username == nil then
-	      	local sem_username = _('%s *Você esta sem @username e em nosso grupo é obrigatório ter. Clique *[aqui](https://t.me/panelinhadobananal/263467) *para aprender a botar um*'):format(msg.from.first_name)
-	      	local res = api.sendMessage(msg.chat.id, sem_username, true)
-	    --  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem nome de usuário.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/202">.</a>',  true, false, false, true)
-	      	if res then
-	        	return
-	      	end
-	    end
-		local fotos = api.getUserProfilePhotos(msg.from.id)
-		if fotos.result.total_count == 0 then
-			local sem_foto = _('%s *Você esta sem foto de perfil e em nosso grupo é obrigatório ter. Clique *[aqui](https://t.me/panelinhadobananal/263466) *para aprender a botar uma*'):format(msg.from.first_name)
-	      	local res = api.sendMessage(msg.chat.id, sem_foto, true)
-	    --  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem foto de perfil.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/201">.</a>', true, false, false, true)
-	      	if res then
-	        	return
-	        end
-		else
-			local aleatorio = {
-				'*Gratificado pela preferência*',
-				'*Fique a vontade conosco*',
-				'*Agradecemos por fazer parte de nosso grupo*',
-				'*Fique a vontade conosco*',
-				'*Ficamos felizes por esta aqui*',
-				'*Espero que goste de nosso grupo*',
-				'*E um prazer ter você aqui*',
-				'*O grupo agradece por ter entrado em nosso grupo*',
-				'*Obrigado por entrar em nosso grupo*'
-			}
+		local aleatorio = {
+			'*Gratificado pela preferência*',
+			'*Fique a vontade conosco*',
+			'*Agradecemos por fazer parte de nosso grupo*',
+			'*Fique a vontade conosco*',
+			'*Ficamos felizes por esta aqui*',
+			'*Espero que goste de nosso grupo*',
+			'*E um prazer ter você aqui*',
+			'*O grupo agradece por ter entrado em nosso grupo*',
+			'*Obrigado por entrar em nosso grupo*'
+		}
 			entrada = aleatorio[math.random(#aleatorio)]
 			return _(entrada .. " [%s](%s)"):format(msg.new_chat_member.first_name:escape(), 'telegram.me/'..msg.from.username:escape())
 		end
