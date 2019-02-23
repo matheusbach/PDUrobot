@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GroupButler 4.0\n"
-"Report-Msgid-Bugs-To: https://telegram.me/bac0nnn\n"
+"Project-Id-Version: PDUrobot 2.0\n"
+"Report-Msgid-Bugs-To: https://telegram.me/matheus_bach\n"
 "POT-Creation-Date: 2017-01-18 02:55+0100\n"
-"PO-Revision-Date: 2017-01-19 13:53-0200\n"
-"Last-Translator: Nicholas Guriev <guriev-ns@ya.ru>\n"
+"PO-Revision-Date: 2019-02-23 13:53-0200\n"
+"Last-Translator: Nicholas Guriev e Matheus Bach <guriev-ns@ya.ru>\n"
 "Language-Team: Brazilian Portuguese\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -33,19 +33,18 @@ msgid ""
 "convert this group to a supergroup.\n"
 msgstr ""
 "\n"
-"Olá a todos!\n"
-"Meu nome é %s, e eu sou um bot feito para ajudar os administradores em seu "
-"trabalho duro.\n"
-"Infelizmente não consigo trabalhar em grupos normais, peça ao criador do "
-"grupo para converter esse grupo em um supergrupo.\n"
+"Olá macaquitos!\n"
+"Eu sou %s, um escravo virtual preso no telegram. "
+"Trabalho para manter o grupo na linha enquando mod corno beta pra trap.\n"
+"Eu funciono melhor em supergrupos sendo um administrador.\n"
 
 #: methods.lua:145
 msgid "I'm not an admin, I can't kick people"
-msgstr "Não sou admin, não posso remover pessoas"
+msgstr "Antes de pedir pra eu kickar o cara pelo menos me da mod pra isso"
 
 #: methods.lua:147
 msgid "I can't kick or ban an admin"
-msgstr "Não posso kickar ou banir um administrador"
+msgstr "Nem querendo eu não consigo banir o cara já que ele é mod"
 
 #: methods.lua:149
 msgid "There is no need to unban in a normal group"
@@ -53,12 +52,12 @@ msgstr "Não há necessidade de desbanir num grupo comum"
 
 #: methods.lua:151
 msgid "This user is not a chat member"
-msgstr "Este usuário não é um membro do grupo"
+msgstr "Mano esse cara nem tá aqui no grupo"
 
 #: plugins/antispam.lua:57
 #, lua-format
 msgid "%s %s for <b>spam</b>! (%d/%d)"
-msgstr "%s %s por <b>spam</b>! (%d/%d)"
+msgstr "Macaco %s foi %s por <b>spam</b>! (%d/%d)"
 
 #: plugins/antispam.lua:60
 #, lua-format
@@ -68,11 +67,11 @@ msgstr "%s, este tipo de mídia não é permitido nesse chat (<b>%d/%d</b>)"
 #: plugins/antispam.lua:60
 #, lua-format
 msgid "%s, spam is not allowed here. The next time you will be restricted"
-msgstr "%s, spam não é permitido aqui. A próxima vez que você mandar será punido."
+msgstr "Sem spam aqui %s, na próxima te mando pra casa do caralho."
 
 #: plugins/antispam.lua:62
 msgid "telegram.me link"
-msgstr "link telegram.me "
+msgstr "link telegram "
 
 #: plugins/antispam.lua:62
 msgid "message from a channel"
@@ -101,7 +100,7 @@ msgstr "Novo valor: %d"
 
 #: plugins/antispam.lua:127
 msgid "Allow/forbid telegram.me links"
-msgstr "Permitir/proibir links telegram.me"
+msgstr "Permitir/proibir links telegram"
 
 #: plugins/antispam.lua:129
 msgid "Allow/forbid forwarded messages from channels"
@@ -129,11 +128,11 @@ msgstr "Mensagens de canais"
 
 #: plugins/antispam.lua:160
 msgid "Kick 👞"
-msgstr "Kick 👞"
+msgstr "Kickar 👞"
 
 #: plugins/antispam.lua:162
 msgid "Ban 🔨"
-msgstr "Ban 🔨"
+msgstr "Banir 🔨"
 
 #: plugins/antispam.lua:208 plugins/floodmanager.lua:115
 #: plugins/logchannel.lua:118 plugins/mediasettings.lua:68 plugins/menu.lua:223
