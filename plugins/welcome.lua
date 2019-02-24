@@ -146,7 +146,7 @@ function plugin.onTextMessage(msg, blocks)
 				to_name = msg.chat.title .. '\n*ID* -' .. math.abs(msg.chat.id) .. ')'
 				botadicionado = '*(Definição de entrada)*\n*Grupo:* ' .. to_name .. '\n*Boas-vindas:* ' .. new_text .. '' 
 			end		
-				api.sendNews(botadicionado, true)            
+				--api.sendNews(botadicionado, true)            
             local res, code = api.sendReply(msg, new_text:gsub('$rules', u.deeplink_constructor(msg.chat.id, 'rules')), true, reply_markup)
             if not res then
                 db:hset(hash, 'type', 'no') --if wrong markdown, remove 'custom' again
