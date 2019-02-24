@@ -34,19 +34,6 @@ local function is_locked(chat_id, thing)
 end
 
 local function get_welcome(msg)
-if msg.from.username == nil then
-	      	local sem_username = _('%s *Você esta sem @username e em nosso grupo é obrigatório ter. Clique *[aqui](https://t.me/panelinhadobananal/263467) *para aprender a botar um*'):format(msg.from.first_name)
-	      	local res = api.sendMessage(msg.chat.id, sem_username, true)
-	    --  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem nome de usuário.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/202">.</a>',  true, false, false, true)
-
-	    end
-		local fotos = api.getUserProfilePhotos(msg.from.id)
-		if fotos.result.total_count == 0 then
-			local sem_foto = _('%s *Você esta sem foto de perfil e em nosso grupo é obrigatório ter. Clique *[aqui](https://t.me/panelinhadobananal/263466) *para aprender a botar uma*'):format(msg.from.first_name)
-	      	local res = api.sendMessage(msg.chat.id, sem_foto, true)
-		--  local res = api.sendMessageHTML(msg.chat.id, '<b>Olá ' .. msg.from.first_name ..'</b>. '..'Você esta sem foto de perfil.\nAssista o gif abaixo'..'<a href="https://t.me/ModeradorNews/201">.</a>', true, false, false, true)
-		
-
 	if is_locked(msg.chat.id, 'Welcome') then
 		return false
 	end
@@ -72,23 +59,22 @@ if msg.from.username == nil then
 	else
 	--	socket.sleep(5)			
 	--	api.deleteMessage(msg.chat.id, msg.message_id)
-	
-			local aleatorio = {
-				'*Gratificado pela preferência*',
-				'*Fique a vontade conosco*',
-				'*Agradecemos por fazer parte de nosso grupo*',
-				'*Fique a vontade conosco*',
-				'*Ficamos felizes por esta aqui*',
-				'*Espero que goste de nosso grupo*',
-				'*E um prazer ter você aqui*',
-				'*O grupo agradece por ter entrado em nosso grupo*',
-				'*Obrigado por entrar em nosso grupo*'
-			}
-			entrada = aleatorio[math.random(#aleatorio)]
-			return _(entrada .. " [%s](%s)"):format(msg.new_chat_member.first_name:escape(), 'telegram.me/'..msg.from.username:escape())
-		end
+		local aleatorio = {
+			'*Gratificado pela preferência*',
+			'*Fique a vontade conosco*',
+			'*Agradecemos por fazer parte de nosso grupo*',
+			'*Fique a vontade conosco*',
+			'*Ficamos felizes por esta aqui*',
+			'*Espero que goste de nosso grupo*',
+			'*E um prazer ter você aqui*',
+			'*O grupo agradece por ter entrado em nosso grupo*',
+			'*Obrigado por entrar em nosso grupo*'
+		}
+		entrada = aleatorio[math.random(#aleatorio)]
+		return _(entrada .. " [%s](%s)"):format(msg.new_chat_member.first_name:escape(), 'telegram.me/'..msg.from.username:escape())
 	end
 end
+
 local function get_goodbye(msg)
 	if is_locked(msg.chat.id, 'Goodbye') then
 		return false
@@ -225,6 +211,14 @@ function plugin.onTextMessage(msg, blocks)
 			db:hset(('chat:%d:settings'):format(msg.chat.id), 'Goodbye', 'on')
 			local id = res.result.message_id
 			api.editMessageText(msg.chat.id, id, _("*Custom goodbye message saved!*"), true)
+		end
+	end
+	if blocks[1] == 'new_chat_member' then
+		if msg.from.username == nil then
+			local sem_username = _('*%s*, se você não definir um @username será banido. [Aprenda a definir um](https://t.me/panelinhadobananal/263467)'):format(msg.from.first_name)
+			--if tonumber(msg.chat.id) == -1001178906515 then
+				api.sendMessage(msg.chat.id, sem_username, true, nil, nil, link_preview)
+			--end
 		end
 	end
     if blocks[1] == 'new_chat_member' then

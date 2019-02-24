@@ -64,6 +64,7 @@ return {
 		'admin',
 		'votekick',
 		'qr',
+		'aviso-novouser',
 		'extra', --must be the last plugin in the list.
 	},
 	multipurpose_plugins = {},
@@ -80,7 +81,7 @@ return {
 			['Silent'] = 'off',
 			['Rules'] = 'on',
 			['Reports'] = 'on',
-			['Welbut'] = 'on', -- "read the rules" button under the welcome message
+			['Welbut'] = 'off', -- "read the rules" button under the welcome message
 			['User votekick'] = 'on',
 			['Weldelchain'] = 'on', -- delete the previously sent welcome message when a new welcome message is sent
 			['Antibot'] = 'off'
@@ -143,26 +144,26 @@ return {
 			['location'] = 'ok'
 		},
 		['tolog'] = {
-			['ban'] = 'no',
-			['kick'] = 'no',
-			['unban'] = 'no',
-			['tempban'] = 'no',
-			['report'] = 'no',
-			['warn'] = 'no',
-			['nowarn'] = 'no',
-			['mediawarn'] = 'no',
-			['spamwarn'] = 'no',
-			['flood'] = 'no',
-			['promote'] = 'no',
-			['demote'] = 'no',
-			['new_chat_member'] = 'no',
-			['new_chat_photo'] = 'no',
-			['delete_chat_photo'] = 'no',
-			['new_chat_title'] = 'no',
-			['pinned_message'] = 'no',
-			['blockban'] = 'no',
-			['block'] = 'no',
-			['unblock'] = 'no'
+			['ban'] = 'yes',
+			['kick'] = 'yes',
+			['unban'] = 'yes',
+			['tempban'] = 'yes',
+			['report'] = 'yes',
+			['warn'] = 'yes',
+			['yeswarn'] = 'yes',
+			['mediawarn'] = 'yes',
+			['spamwarn'] = 'yes',
+			['flood'] = 'yes',
+			['promote'] = 'yes',
+			['demote'] = 'yes',
+			['new_chat_member'] = 'yes',
+			['new_chat_photo'] = 'yes',
+			['delete_chat_photo'] = 'yes',
+			['new_chat_title'] = 'yes',
+			['pinned_message'] = 'yes',
+			['blockban'] = 'yes',
+			['block'] = 'yes',
+			['unblock'] = 'yes'
 		},
 		['modsettings'] = {
 			['promdem'] = 'yes', --'yes': admins can promote or demote moderators; 'no': only the owner can
