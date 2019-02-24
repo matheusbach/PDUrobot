@@ -18,7 +18,7 @@ function plugin.onTextMessage(msg, blocks)
 	
 	if msg.chat.type == 'private' then return end
 	
-	if blocks[1] == 'extra' then
+	if blocks[1] == 'extra' or blocks[1] == 'salvar' or blocks[1] == 'guardar' or blocks[1] == 'lembrar' then
 		if not u.is_allowed('texts', msg.chat.id, msg.from) then return end
 		if not blocks[2] then return end
 		if not blocks[3] and not msg.reply then return end
@@ -52,14 +52,14 @@ function plugin.onTextMessage(msg, blocks)
 				api.editMessageText(msg.chat.id, msg_id, _("Command '%s' saved!"):format(blocks[2]))
     		end
     	end
-	elseif blocks[1] == 'extra list' then
+	elseif blocks[1] == 'extra list' or blocks[1] == 'salvar list' or blocks[1] == 'guardar list' or blocks[1] == 'lembrar list' then
 		local text = u.getExtraList(msg.chat.id)
 	    if not msg.from.mod and not is_locked(msg.chat.id) then
 			api.sendMessage(msg.from.id, text, true)
 		else
 			api.sendReply(msg, text, true)
 		end
-    elseif blocks[1] == 'extra del' then
+    elseif blocks[1] == 'extra del' or blocks[1] == 'salvar del' or blocks[1] == 'guardar del' or blocks[1] == 'lembrar del' then
         if not u.is_allowed('texts', msg.chat.id, msg.from) then return end
 	    
 	    local hash = 'chat:'..msg.chat.id..':extra'
@@ -113,11 +113,26 @@ end
 plugin.triggers = {
 	onTextMessage = {
 		config.cmd..'(extra)$',
-		config.cmd..'(extra) (#[%w_]*) (.*)$',
-		config.cmd..'(extra) (#[%w_]*)',
-		config.cmd..'(extra del) (#[%w_]*)$',
+		config.cmd..'(extra) ([%w_]*) (.*)$',
+		config.cmd..'(extra) ([%w_]*)',
+		config.cmd..'(extra del) ([%w_]*)$',
 		config.cmd..'(extra list)$',
-		'^(#[%w_]*)$'
+		config.cmd..'(salvar)$',
+		config.cmd..'(salvar) ([%w_]*) (.*)$',
+		config.cmd..'(salvar) ([%w_]*)',
+		config.cmd..'(salvar del) ([%w_]*)$',
+		config.cmd..'(salvar list)$',
+		config.cmd..'(guardar)$',
+		config.cmd..'(guardar) ([%w_]*) (.*)$',
+		config.cmd..'(guardar) ([%w_]*)',
+		config.cmd..'(guardar del) ([%w_]*)$',
+		config.cmd..'(guardar list)$',
+		config.cmd..'(lembrar)$',
+		config.cmd..'(lembrar) ([%w_]*) (.*)$',
+		config.cmd..'(lembrar) ([%w_]*)',
+		config.cmd..'(lembrar del) ([%w_]*)$',
+		config.cmd..'(lembrar list)$',
+		'^([%w_]*)$'
 	}
 }
 
