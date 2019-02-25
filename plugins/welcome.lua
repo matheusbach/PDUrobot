@@ -216,9 +216,9 @@ function plugin.onTextMessage(msg, blocks)
 	if blocks[1] == 'new_chat_member' then
 		if msg.from.username == nil then
 			local sem_username = _('*%s*, se você não definir um @username será banido. [Aprenda a definir um](https://t.me/panelinhadobananal/263467)'):format(msg.from.first_name)
-			--if tonumber(msg.chat.id) == -1001178906515 then
+				if tonumber(msg.chat.id) == -1001178906515 then
 				api.sendMessage(msg.chat.id, sem_username, true, nil, nil, link_preview)
-			--end
+			end
 		end
 	end
     if blocks[1] == 'new_chat_member' then
