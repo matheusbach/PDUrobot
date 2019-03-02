@@ -23,7 +23,7 @@ function plugin.onTextMessage(msg, blocks)
 	if msg.chat.type ~= 'private' then return end
 
 	if blocks[1] == 'ping' then
-		local res = api.sendMessage(msg.from.id, _("Pong!"), true)
+		local res = api.sendMessage(msg.from.id, _("Pong! "), true)
 		--[[if res then
 			api.editMessageText(msg.chat.id, res.result.message_id, 'Response time: '..(os.clock() - clocktime_last_update))
 		end]]

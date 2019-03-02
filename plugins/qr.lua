@@ -13,7 +13,7 @@ function plugin.onTextMessage(msg, blocks)
             {{text = ("Acessar codigo"), url = link}} 
         }
     }
-    api.sendMessagePreview(msg.chat.id, '*QRcode* ['..blocks[2]..']('.. link ..')' , true)
+    api.sendMessagePreview(msg.chat.id, '*QRcode* [⠀]('.. link ..')' , true)
     end
 end
 
