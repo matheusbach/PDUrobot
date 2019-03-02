@@ -64,7 +64,6 @@ return {
 		'admin',
 		'votekick',
 		'qr',
-		'aviso-novouser',
 		'comecudecurioso',
 		'extra', --must be the last plugin in the list.
 	},
