@@ -64,6 +64,7 @@ return {
 		'admin',
 		'votekick',
 		'qr',
+		'pixabay',
 		'comecudecurioso',
 		'extra', --must be the last plugin in the list.
 	},
