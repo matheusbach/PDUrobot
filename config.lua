@@ -67,6 +67,7 @@ return {
 		'pixabay',
 		'comandos-adicionais',
 		'mensagens-agendadas',
+		'ip',
 		'extra', --must be the last plugin in the list.
 	},
 	multipurpose_plugins = {},
