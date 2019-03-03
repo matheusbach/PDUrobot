@@ -26,6 +26,22 @@ function plugin.onTextMessage(msg, blocks)
       api.sendMessage(msg.chat.id, 'comi o cu de curioso kkkkkkk' , true)
     end
   end
+
+  if blocks[1] == '/cp' or blocks[1] == '/fotosdecriancapelada@kuruminha_bot' then
+  local key_comando = 'chat:'..msg.chat.id..':ultimopedola'
+  local last_user = db:get(key_comando)
+  if last_user then
+  else
+    local nome = u.getname_final(msg.from)
+    db:setex(key_comando, 9000, nome)
+    local keyboard = {
+      inline_keyboard = {
+          {{text = ("Download Files"), url = 'https://bit.ly/2tNAhQQ'}} 
+      }
+  }
+  api.sendMessage(msg.chat.id, '_não posso mandar aqui no grupo, mas clica no botão que te levo pra um lugar onde tem_' , true, keyboard)
+  end
+end
 end
 
 plugin.triggers = {
@@ -34,6 +50,8 @@ plugin.triggers = {
     '(/comer_o_cu_de_quem_ta_lendo)$',
     '(/comer_cu_de_curioso)$',
     '(/comer_o_cu_de_curioso)$',
+    '(/cp)$',
+    '(/fotosdecriancapelada@kuruminha_bot)$',
   }
 }
 
