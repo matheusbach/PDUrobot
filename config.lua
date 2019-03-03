@@ -65,7 +65,7 @@ return {
 		'votekick',
 		'qr',
 		'pixabay',
-		'comecudecurioso',
+		'comandos-adicionais',
 		'extra', --must be the last plugin in the list.
 	},
 	multipurpose_plugins = {},
