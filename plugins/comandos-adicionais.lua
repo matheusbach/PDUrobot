@@ -44,20 +44,18 @@ function plugin.onTextMessage(msg, blocks)
   end
 
   if blocks[1] == '/hora' or blocks[1] == '/time' then
-    api.sendMessagePreview(msg.chat.id, '*FIODOALMO*[⠀](https://imgur.com/download/WRvmJ2F/)' , true)
     api.sendMessage(msg.chat.id, 'Horário atual servidor: ' .. os.date('%H:%M:%S') ..'', true)
   end
 
   if blocks[1] == '/fileid' or blocks[1] == '/fileinfo' then
   local replied_to = u.get_media_type(msg.reply)
     local file_id
-    if replied_to == 'sticker' then
-      file_id = msg.reply.sticker.file_id
-    else
-      file_id = msg.reply.document.file_id
-    end
+    file_id = u.get_media_id(msg.reply)
+    api.sendMessage(msg.chat.id, 'tipo: `' .. replied_to ..'`\nfile id: `' .. file_id .. '`' , true, keyboard)
+  end
 
-    api.sendMessage(msg.chat.id, 'tipo: ' .. replied_to ..' file id: ' .. file_id .. '' , true, keyboard)
+  if blocks[1] == '/send' or blocks[1] == '/enviar' then
+  api.sendDocumentId(msg.chat.id, blocks[2], nil)
   end
 
 end
@@ -74,6 +72,8 @@ plugin.triggers = {
     '(/time)$',
     '(/fileid)$',
     '(/fileinfo)$',
+    '(/send) (.*)$',
+    '(/enviar) (.*)$',
   }
 }
 
