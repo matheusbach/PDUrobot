@@ -51,11 +51,18 @@ function plugin.onTextMessage(msg, blocks)
   local replied_to = u.get_media_type(msg.reply)
     local file_id
     file_id = u.get_media_id(msg.reply)
-    api.sendMessage(msg.chat.id, 'tipo: `' .. replied_to ..'`\nfile id: `' .. file_id .. '`' , true, keyboard)
+    if file_id == false then
+      api.sendMessage(msg.chat.id, 'tipo: `' .. replied_to ..'`\nfile id: `nulo`' , true, keyboard)
+    else
+      api.sendMessage(msg.chat.id, 'tipo: `' .. replied_to ..'`\nfile id: `' .. file_id .. '`' , true, keyboard)
+    end
   end
 
   if blocks[1] == '/send' or blocks[1] == '/enviar' then
-  api.sendDocumentId(msg.chat.id, blocks[2], nil)
+    api.sendDocumentId(msg.from.id, blocks[2])
+    api.sendMediaId(msg.from.id, blocks[2], 'photo')
+    api.sendMediaId(msg.from.id, blocks[2], 'voice')
+    api.sendMediaId(msg.from.id, blocks[2], 'video')
   end
 
 end
