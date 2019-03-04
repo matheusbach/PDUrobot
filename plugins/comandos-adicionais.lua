@@ -44,7 +44,16 @@ function plugin.onTextMessage(msg, blocks)
   end
 
   if blocks[1] == '/hora' or blocks[1] == '/time' then
-    api.sendMessage(msg.chat.id, 'Horário atual servidor: ' .. os.date('%H:%M:%S') ..'', true)
+    hora_UTC = os.date('!%H')
+    minuto_UTC = os.date('!%M')
+    segundo_UTC = os.date('!%S')
+    timezone_horas = -3       --coloque seu fuso horário em horas aqui
+    timezone_minutos = 00     --coloque seu fuso horário em minutos aqui
+    hora_local = hora_UTC+timezone_horas
+    minuto_local = minuto_UTC+timezone_minutos
+    horario_local = hora_local..":"..minuto_local..":"..segundo_UTC
+
+    api.sendMessage(msg.chat.id, '*Horário de Brasília:* ' .. horario_local ..' ('..hora_UTC..":"..minuto_UTC..":"..segundo_UTC..' UTC)', true)
   end
 
   if blocks[1] == '/fileid' or blocks[1] == '/fileinfo' then
