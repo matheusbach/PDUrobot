@@ -27,10 +27,23 @@ function plugin.cron()
     end
   end
 
-  --FIODOALMO
+  --FIODOALMO PDU
   if horario_local == '11:45' then
     fileid = 'AgADAQADgagxG0mWqUdin5qFO1dxw4t3DDAABDseGiWMd1q59MQDAAEC'
     chatid = '-1001178906515'
+    photo_voice_or_video = true --true se a midia for foto, voz ou video, senão coloque false
+    special_method = 'photo' --photo, voice ou video
+    if photo_voice_or_video == true then
+      api.sendMediaId(chatid, fileid, special_method) --photo, voices, video precisam
+    else
+      api.sendDocumentId(chatid, fileid)
+    end
+  end
+
+    --FIODOALMO Auschwitz
+  if horario_local == '11:45' then
+    fileid = 'AgADAQADgagxG0mWqUdin5qFO1dxw4t3DDAABDseGiWMd1q59MQDAAEC'
+    chatid = '1001340438412'
     photo_voice_or_video = true --true se a midia for foto, voz ou video, senão coloque false
     special_method = 'photo' --photo, voice ou video
     if photo_voice_or_video == true then
