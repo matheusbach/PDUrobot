@@ -51,7 +51,13 @@ function plugin.cron()
     else
       api.sendDocumentId(chatid, fileid)
     end
-  end  
+  end
+
+  --22:22
+  if horario_local == '22:22' then
+    chatid = '-1001178906515'
+    api.sendMessage(chatid, "22:22")
+  end
 end
 
 return plugin
