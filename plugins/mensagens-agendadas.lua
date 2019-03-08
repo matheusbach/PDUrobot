@@ -15,19 +15,6 @@ function plugin.cron()
   minuto_local = minuto_UTC+timezone_minutos
   horario_local = hora_local..":"..minuto_local
 
-  --BOM DIA
-  if horario_local == '05:45' then
-    fileid = 'CAADAQADowIAAoe7Lx_Tqx3y7MrcgAI'
-    chatid = '-1001178906515'
-    photo_voice_or_video = false   --true se a midia for foto, voz ou video, senão coloque false
-    special_method = nill --photo, voice ou video
-    if photo_voice_or_video == true then
-      api.sendMediaId(chatid, fileid, special_method) --photo, voices, video precisam
-    else
-      api.sendDocumentId(chatid, fileid)
-    end
-  end
-
   --FIODOALMO
   if horario_local == '11:45' then
   --PDU

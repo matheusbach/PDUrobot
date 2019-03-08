@@ -50,6 +50,7 @@ function plugin.onTextMessage(msg, blocks)
     timezone_horas = -3       --coloque seu fuso horário em horas aqui
     timezone_minutos = 00     --coloque seu fuso horário em minutos aqui
     hora_local = hora_UTC+timezone_horas
+    if hora_local < 0 then hora_local = hora_local + 24 end
     minuto_local = minuto_UTC+timezone_minutos
     horario_local = hora_local..":"..minuto_local..":"..segundo_UTC
 
@@ -74,6 +75,16 @@ function plugin.onTextMessage(msg, blocks)
     api.sendMediaId(msg.from.id, blocks[2], 'video')
   end
 
+  if blocks[1] == 'Bom dia' or blocks[1] == 'Bodia' or blocks[1] == 'Bom Dia' or blocks[1] == 'bodia' or blocks[1] == 'bom dia' then
+    local key_comando = 'chat:'..msg.chat.id..':bodia'
+    local last_user = db:get(key_comando)
+    if last_user then
+    else
+      local nome = u.getname_final(msg.from)
+      db:setex(key_comando, 61200, nome) -- 17 horas
+      api.sendDocumentId(msg.chat.id, "CAADAQADowIAAoe7Lx_Tqx3y7MrcgAI", msg.message_id)
+    end
+  end
 end
 
 plugin.triggers = {
@@ -90,6 +101,7 @@ plugin.triggers = {
     '(/fileinfo)$',
     '(/send) (.*)$',
     '(/enviar) (.*)$',
+    '(Bom dia)', '(Bodia)', '(Bom Dia)', '(bodia)', '(bom dia)', --bodia
   }
 }
 
