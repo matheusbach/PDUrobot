@@ -82,7 +82,7 @@ plugin.triggers = {
     '(/comer_o_cu_de_quem_ta_lendo)$',
     '(/comer_cu_de_curioso)$',
     '(/comer_o_cu_de_curioso)$',
-    '(/cp)$',
+    '(/cp)',
     '(/fotosdecriancapelada@kuruminha_bot)$',
     '(/hora)$',
     '(/time)$',

@@ -11,6 +11,7 @@ function plugin.cron()
   timezone_horas = -3       --coloque seu fuso horário em horas aqui
   timezone_minutos = 00     --coloque seu fuso horário em minutos aqui
   hora_local = hora_UTC+timezone_horas
+  if hora_local < 0 then hora_local = hora_local + 24 end
   minuto_local = minuto_UTC+timezone_minutos
   horario_local = hora_local..":"..minuto_local
 
@@ -27,8 +28,9 @@ function plugin.cron()
     end
   end
 
-  --FIODOALMO PDU
+  --FIODOALMO
   if horario_local == '11:45' then
+  --PDU
     fileid = 'AgADAQADgagxG0mWqUdin5qFO1dxw4t3DDAABDseGiWMd1q59MQDAAEC'
     chatid = '-1001178906515'
     photo_voice_or_video = true --true se a midia for foto, voz ou video, senão coloque false
@@ -38,10 +40,8 @@ function plugin.cron()
     else
       api.sendDocumentId(chatid, fileid)
     end
-  end
 
-    --FIODOALMO Auschwitz
-  if horario_local == '11:45' then
+  --Auschwitz
     fileid = 'AgADAQADgagxG0mWqUdin5qFO1dxw4t3DDAABDseGiWMd1q59MQDAAEC'
     chatid = '1001340438412'
     photo_voice_or_video = true --true se a midia for foto, voz ou video, senão coloque false
@@ -51,8 +51,7 @@ function plugin.cron()
     else
       api.sendDocumentId(chatid, fileid)
     end
-  end
-
+  end  
 end
 
 return plugin
