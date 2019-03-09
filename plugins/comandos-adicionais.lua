@@ -76,13 +76,36 @@ function plugin.onTextMessage(msg, blocks)
   end
 
   if blocks[1] == 'Bom dia' or blocks[1] == 'Bodia' or blocks[1] == 'Bom Dia' or blocks[1] == 'bodia' or blocks[1] == 'bom dia' then
+   local bodia = {
+    'CAADAQADowIAAoe7Lx_Tqx3y7MrcgAI', -- stiker bom dia caralho
+    'CQADAQADbAADQjUZRDcJzQXatxYTAg', -- bom dia torcida jovem do flamengo
+    'CAADAQAD-AIAAoe7Lx-igkIFPnnonwI', -- sticker bom dia viadoes
+    'CAADAQADlQoAAoyTExTTrDAlRzetwgI', -- sticker seu dia vai ser uma bosta
+    'CAADAQADQQADrYvUFYlPxYGOiRUyAg', -- ohayo
+    'CAADAQADxwoAAoyTExRtM8Wgx-ggWAI', -- dia ruim da porra
+    'CAADAQADvwoAAoyTExTWCiLPpwhYCAI', -- bom dia lixo humano
+    'CAADAQADuAoAAoyTExR90GsdoHdOjwI', -- acorda o fracasso te espera
+    'CAADAQADQQADrYvUFYlPxYGOiRUyAg', -- ohayo
+    'AwADBAADEqIAAmUXZAdVri1Cp3gkfAI', -- que tem de bom
+    'AwADBAADmAADXzxMUPhM8seNqS8ZAg', -- xuxa
+    'AwADBAAD5qEAAsoYZAcP89dXazhJlgI', -- saudades de você musica
+    'AwADBAADfacAArMZZAcT20N7X6xCegI', -- booom diaaa!
+    'AwADBAADJ6MAApAcZAczqtG8_khsVgI', -- ^m^
+    'AwADBAADu6UAAlcYZAc3Kj7VWBLa8AI', -- bom dia povo do meu brasil varonil
+    'AwADBAADeqIAAp4cZAfLmxlYcBQuyAI', -- bom dia xuxuzinho
+  }
+    mensagemBodia = bodia[math.random(#bodia)]
+
     local key_comando = 'chat:'..msg.chat.id..':bodia'
     local last_user = db:get(key_comando)
     if last_user then
     else
       local nome = u.getname_final(msg.from)
       db:setex(key_comando, 61200, nome) -- 17 horas
-      api.sendDocumentId(msg.chat.id, "CAADAQADowIAAoe7Lx_Tqx3y7MrcgAI", msg.message_id)
+      api.sendDocumentId(msg.chat.id, mensagemBodia, msg.message_id)
+      api.sendMediaId(msg.from.id, mensagemBodia, 'photo', msg.message_id)
+      api.sendMediaId(msg.from.id, mensagemBodia, 'voice', msg.message_id)
+      api.sendMediaId(msg.from.id, mensagemBodia, 'video', msg.message_id)
     end
   end
 end
