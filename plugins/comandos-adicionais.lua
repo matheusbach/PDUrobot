@@ -103,9 +103,9 @@ function plugin.onTextMessage(msg, blocks)
       local nome = u.getname_final(msg.from)
       db:setex(key_comando, 61200, nome) -- 17 horas
       api.sendDocumentId(msg.chat.id, mensagemBodia, msg.message_id)
-      api.sendMediaId(msg.from.id, mensagemBodia, 'photo', msg.message_id)
-      api.sendMediaId(msg.from.id, mensagemBodia, 'voice', msg.message_id)
-      api.sendMediaId(msg.from.id, mensagemBodia, 'video', msg.message_id)
+      api.sendMediaId(msg.chat.id, mensagemBodia, 'photo', msg.message_id)
+      api.sendMediaId(msg.chat.id, mensagemBodia, 'voice', msg.message_id)
+      api.sendMediaId(msg.chat.id, mensagemBodia, 'video', msg.message_id)
     end
   end
 end
