@@ -36,10 +36,10 @@ function plugin.onTextMessage(msg, blocks)
       db:setex(key_comando, 9000, nome)
       local keyboard = {
         inline_keyboard = {
-          {{text = ("Download Files"), url = 'https://bit.ly/2tNAhQQ'}} 
+          {{text = ("Download Files"), url = 'https://tinyurl.com/pack-cp-rar'}} 
       }
     }
-    api.sendMessage(msg.chat.id, '_não posso mandar aqui no grupo, mas clica no botão que te levo pra um lugar onde tem_' , true, keyboard)
+    api.sendMessage(msg.chat.id, '_Por razões de segurança não poderei le enviar nesse grupo, acesse o pack-cp.rar usando o botão_' , true, keyboard)
     end
   end
 
@@ -120,8 +120,15 @@ function plugin.onTextMessage(msg, blocks)
     mensagemAcordarR = mensagemAcordar[math.random(#mensagemAcordar)]
     mensageFioDormirR = mensageFioDormir[math.random(#mensageFioDormir)]
 
-    api.sendMessage(msg.chat.id, mensagemAcordarR, true)
-    api.sendMessage(msg.chat.id, mensageFioDormirR, true)
+    local key_comando = 'chat:'..msg.chat.id..':acordar'
+    local last_user = db:get(key_comando)
+    if last_user then
+    else
+      local nome = u.getname_final(msg.from)
+      db:setex(key_comando, 14400, nome)
+      api.sendMessage(msg.chat.id, mensagemAcordarR, true)
+      api.sendMessage(msg.chat.id, mensageFioDormirR, true)
+    end
   end
 end
 
@@ -131,7 +138,7 @@ plugin.triggers = {
     '(/comer_o_cu_de_quem_ta_lendo)$',
     '(/comer_cu_de_curioso)$',
     '(/comer_o_cu_de_curioso)$',
-    '(/cp)',
+    '(/cp)$',
     '(/fotosdecriancapelada@kuruminha_bot)$',
     '(/hora)$',
     '(/time)$',
