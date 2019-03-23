@@ -69,6 +69,7 @@ return {
 		'mensagens-agendadas',
 		'ip',
 		'btc',
+		'ajudar',
 		'extra', --must be the last plugin in the list.
 	},
 	multipurpose_plugins = {},

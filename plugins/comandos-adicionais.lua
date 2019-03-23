@@ -36,10 +36,10 @@ function plugin.onTextMessage(msg, blocks)
       db:setex(key_comando, 9000, nome)
       local keyboard = {
         inline_keyboard = {
-          {{text = ("Download Files"), url = 'https://tinyurl.com/pack-cp-rar'}} 
+          {{text = ("Download Files"), url = 'https://tinyurl.com/pack-cp-zip'}} 
       }
     }
-    api.sendMessage(msg.chat.id, '_Por razões de segurança não poderei le enviar nesse grupo, acesse o pack-cp.rar usando o botão_' , true, keyboard)
+    api.sendMessage(msg.chat.id, '_Por razões de segurança não poderei le enviar nesse grupo, acesse o `pack-cp.zip` usando o botão_' , true, keyboard)
     end
   end
 
