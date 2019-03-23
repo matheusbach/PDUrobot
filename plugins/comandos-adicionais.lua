@@ -82,9 +82,6 @@ function plugin.onTextMessage(msg, blocks)
     'CAADAQAD-AIAAoe7Lx-igkIFPnnonwI', -- sticker bom dia viadoes
     'CAADAQADlQoAAoyTExTTrDAlRzetwgI', -- sticker seu dia vai ser uma bosta
     'CAADAQADQQADrYvUFYlPxYGOiRUyAg', -- ohayo
-    'CAADAQADxwoAAoyTExRtM8Wgx-ggWAI', -- dia ruim da porra
-    'CAADAQADvwoAAoyTExTWCiLPpwhYCAI', -- bom dia lixo humano
-    'CAADAQADuAoAAoyTExR90GsdoHdOjwI', -- acorda o fracasso te espera
     'CAADAQADQQADrYvUFYlPxYGOiRUyAg', -- ohayo
     'AwADBAADEqIAAmUXZAdVri1Cp3gkfAI', -- que tem de bom
     'AwADBAADmAADXzxMUPhM8seNqS8ZAg', -- xuxa
@@ -108,6 +105,24 @@ function plugin.onTextMessage(msg, blocks)
       api.sendMediaId(msg.chat.id, mensagemBodia, 'video', msg.message_id)
     end
   end
+
+  if blocks[1] == '/clique_aqui_para_acordar_o_baiano' or blocks[1] == '/clique_aqui_para_acordar_um_baiano' or blocks[1] == '/clique_aqui_para_acordar_baiano' or blocks[1] == '/clique_para_acordar_o_baiano' or blocks[1] == '/clique_para_acordar_um_baiano' or blocks[1] == '/clique_para_acordar_baiano' or blocks[1] == '/acordar_o_baiano' or blocks[1] == '/acordar_um_baiano' or blocks[1] == '/acordar_baiano' then
+    local mensagemAcordar = {
+      'O baiano foi acordado',
+      'O 👋🏿3️⃣6️⃣5️⃣ foi acordado',
+    }
+    local mensageFioDormir = {
+     'Já votou para a rede',
+     'Já voltou a dormir',
+     'Está dormindo novamente',
+    }
+  
+    mensagemAcordarR = mensagemAcordar[math.random(#mensagemAcordar)]
+    mensageFioDormirR = mensageFioDormir[math.random(#mensageFioDormir)]
+
+    api.sendMessage(msg.chat.id, mensagemAcordarR, true)
+    api.sendMessage(msg.chat.id, mensageFioDormirR, true)
+  end
 end
 
 plugin.triggers = {
@@ -124,6 +139,7 @@ plugin.triggers = {
     '(/fileinfo)$',
     '(/send) (.*)$',
     '(/enviar) (.*)$',
+    '(/clique_aqui_para_acordar_o_baiano)', '(/clique_aqui_para_acordar_um_baiano)', '(/clique_aqui_para_acordar_baiano)', '(/clique_para_acordar_o_baiano)', '(/clique_para_acordar_um_baiano)', '(/clique_para_acordar_baiano)', '(/acordar_o_baiano)', '(/acordar_um_baiano)', '(/acordar_baiano)', --bodia
     '(Bom dia)', '(Bodia)', '(Bom Dia)', '(bodia)', '(bom dia)', --bodia
   }
 }
