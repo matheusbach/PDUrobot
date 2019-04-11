@@ -70,7 +70,8 @@ return {
 		'ip',
 		'btc',
 		'ajudar',
-		'extra', --must be the last plugin in the list.
+		'fiodoalmo',
+		'extra', --must be the last plugin in the list
 	},
 	multipurpose_plugins = {},
 	available_languages = {
