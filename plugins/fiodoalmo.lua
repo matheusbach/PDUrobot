@@ -18,7 +18,7 @@ function plugin.onTextMessage(msg, blocks)
       id_canal_fiodoalmo = -1001458172993
 
       api.forwardMessage(id_canal_fiodoalmo, msg.from.id, msg.message_id)
-      api.sendReply(msg, "Rango postado no [canal](t.me/fiodoalmo)")
+      api.sendReply(msg, "Rango postado no [canal](t.me/fiodoalmo)", true)
     end
   end
 end
