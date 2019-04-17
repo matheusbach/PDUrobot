@@ -10,17 +10,16 @@ function plugin.onTextMessage(msg, blocks)
   if msg.photo then
     local key_comando = 'chat:'..msg.from.id..':fiodoalmo'
     local last_user = db:get(key_comando)
---    if last_user then
-  --    api.sendReply(msg, "Você já fez seu fiodoalmo")
-   -- else
-    --  local nome = u.getname_final(msg.from)
-    --  db:setex(key_comando, 61200, nome) -- 17 horas
+    if last_user then
+      api.sendReply(msg, "Você já fez seu fiodoalmo")
+    else
+      local nome = u.getname_final(msg.from)
+      db:setex(key_comando, 61200, nome) -- 17 horas
       id_canal_fiodoalmo = -1001458172993
 
       api.forwardMessage(id_canal_fiodoalmo, msg.chat.id, msg.message_id)
-      api.sendReply(msg, msg.from.id)
       api.sendReply(msg, "Rango postado no [canal](t.me/fiodoalmo)", true)
---    end
+    end
   end
 end
 

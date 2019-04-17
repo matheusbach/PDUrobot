@@ -1,6 +1,7 @@
 local config = require 'config'
 local u = require 'utilities'
 local api = require 'methods'
+local socket = require 'socket'
 
 local plugin = {}
 
@@ -130,6 +131,16 @@ function plugin.onTextMessage(msg, blocks)
       api.sendMessage(msg.chat.id, mensageFioDormirR, true)
     end
   end
+
+  if blocks[1] == '/ping' then
+    local tempoInicial = socket.gettime()
+    local message = api.getMe()
+    local tempoFinal = socket.gettime()-tempoInicial
+    tempoFinal = string.format('%.3f', tempoFinal)
+    chat_id = msg.chat.id,
+    api.sendMessage(msg.chat.id, 'pingado \n`' ..math.ceil(tempoFinal*1000).. ' ms`', true)
+  end
+
 end
 
 plugin.triggers = {
@@ -145,6 +156,7 @@ plugin.triggers = {
     '(/fileid)$',
     '(/fileinfo)$',
     '(/send) (.*)$',
+    '(/ping)$',
     '(/enviar) (.*)$',
     '(/clique_aqui_para_acordar_o_baiano)', '(/clique_aqui_para_acordar_um_baiano)', '(/clique_aqui_para_acordar_baiano)', '(/clique_para_acordar_o_baiano)', '(/clique_para_acordar_um_baiano)', '(/clique_para_acordar_baiano)', '(/acordar_o_baiano)', '(/acordar_um_baiano)', '(/acordar_baiano)', --bodia
     '(Bom dia)', '(Bodia)', '(Bom Dia)', '(bodia)', '(bom dia)', --bodia
