@@ -1,5 +1,5 @@
 return {
-	Token = "token do bot",
+	Token = "592305753:AAFG1b_9LuP5YVjKE-207Q5A7Ve-3YW-k4s",
 	allowed_updates = {"message", "edited_message", "callback_query"},
 	human_readable_version = '2.4',
 	source_code = 'https://github.com/matheusbach/PDUrobot',
