@@ -6,41 +6,41 @@ local plugin = {}
 
 local function get_alert_text(key)
 	if key == 'new_chat_member' then
-		return _("Log every time an user join the group")
+		return _("Registra sempre que um membro entra no grupo")
 	elseif key == 'ban' then
-		return _("Bans will be logged. I can't log manual bans")
+		return _("Registra bans. Apenas bans com comando /ban")
 	elseif key == 'kick' then
-		return _("Kicks will be logged. I can't log manual kicks")
+		return _("Registra kicks. Apenas kicks com comando /kick")
 	elseif key == 'warn' then
-		return _("Manual warns will be logged")
+		return _("Alertas serão registrados")
 	elseif key == 'mediawarn' then
-		return _("Forbidden media will be logged in the channel")
+		return _("Medias não permitidas serão registradas")
 	elseif key == 'spamwarn' then
-		return _("Spam links/forwards from channels will be logged in the channel, only if forbidden")
+		return _("Spam links/encainhamentos serão registrados (caso não sejam permitidos)")
 	elseif key == 'flood' then
-		return _("Log when an user is flooding (new log message every 5 flood messages)")
+		return _("Registrar flood")
 	elseif key == 'new_chat_photo' then
-		return _("Log when an admin changes the group icon")
+		return _("Registrar mudanças na foto do grupo")
 	elseif key == 'delete_chat_photo' then
-		return _("Log when an admin deletes the group icon")
+		return _("Registrar quando a foto do grupo é deletada")
 	elseif key == 'new_chat_title' then
-		return _("Log when an admin change the group title")
+		return _("Registrar quando um admin muda o nome do grupo")
 	elseif key == 'pinned_message' then
-		return _("Log pinned messages")
+		return _("Registrar mensagens fixadas")
 	elseif key == 'blockban' then
-		return _("Log when an user who has been blocked is banned from the group (when he join)")
+		return _("Registrar blockbans")
 	elseif key == 'promote' then
-		return _("Log when a new user is promoted to moderator")
+		return _("Registrar quando um user recebe cargos de moderador")
 	elseif key == 'demote' then
-		return _("Log when an user looses the role of moderator")
+		return _("Registrar quando um user perde o mod")
 	elseif key == 'cleanmods' then
-		return _("Log when someone demotes all the moderators with '/modlist -'")
+		return _("Registrar quando um admin usa '/modlist -' para tirar mod de todos")
 	elseif key == 'nowarn' then
-		return _("Log when an admin removes the warning received by an user")
+		return _("Registrar quando advertências forem removidas de um user")
 	elseif key == 'report' then
-		return _("Log when an user reports a message with the @admin command")
+		return _("Registro de denúncias com o @admin como resposta")
 	else
-		return _("Description not available")
+		return _("Descrição não disponível")
 	end
 end
 
@@ -59,25 +59,25 @@ local function doKeyboard_logchannel(chat_id)
 	local event_pretty = {
 		['ban'] = _('Ban'),
 		['kick'] = _('Kick'),
-		['unban'] = _('Unban'),
+		['unban'] = _('Desban'),
 		['tempban'] = _('Tempban'),
 		['report'] = _('Report'),
-		['warn'] = _('Warns'),
-		['nowarn'] = _('Warns resets'),
-		['new_chat_member'] = _('New members'),
-		['mediawarn'] = _('Media warns'),
-		['spamwarn'] = _('Spam warns'),
+		['warn'] = _('Avisos'),
+		['nowarn'] = _('Avisos resetados'),
+		['new_chat_member'] = _('Novos membros'),
+		['mediawarn'] = _('Avisos de midia'),
+		['spamwarn'] = _('Avisos de Spam'),
 		['flood'] = _('Flood'),
-		['promote'] = _('Promotions'),
-		['demote'] = _('Demotions'),
-		['cleanmods'] = _('All mods demoted'),
-		['new_chat_photo'] = _('New group icon'),
-		['delete_chat_photo'] = _('Group icon removed'),
-		['new_chat_title'] = _('New group title'),
-		['pinned_message'] = _('Pinned messages'),
-		['blockban'] = _("Users blocked and banned"),
-		['block'] = _("Users blocked"),
-		['unblock'] = _("Users unblocked")
+		['promote'] = _('Promoções de cargo'),
+		['demote'] = _('Rebaixamentos de cargo'),
+		['cleanmods'] = _('Todos moderadores rebaixados'),
+		['new_chat_photo'] = _('Nova foto de grupo'),
+		['delete_chat_photo'] = _('Foto de grupo removida'),
+		['new_chat_title'] = _('Novo nome de grupo'),
+		['pinned_message'] = _('Mensagens fixadas'),
+		['blockban'] = _("Usuários bloqueados e banidos"),
+		['block'] = _("Usuários bloqueados"),
+		['unblock'] = _("Usuários desbloqueados")
 	}
 	
 	local keyboard = {inline_keyboard={}}
@@ -100,12 +100,12 @@ function plugin.onCallbackQuery(msg, blocks)
 	if blocks[1] == 'logcb' then
 		local chat_id = msg.target_id
 		if not msg.from.admin then
-			api.answerCallbackQuery(msg.cb_id, _("You are not admin of this group"), true)
+			api.answerCallbackQuery(msg.cb_id, _("Você não é um administrador"), true)
 		else
 			if blocks[2] == 'unban' or blocks[2] == 'untempban' then
 				local user_id = blocks[3]
 				api.unbanUser(chat_id, user_id)
-				api.answerCallbackQuery(msg.cb_id, _("User unbanned!"), true)
+				api.answerCallbackQuery(msg.cb_id, _("Usuário desbanido!"), true)
 			end
 		end
 	else
@@ -118,7 +118,7 @@ function plugin.onCallbackQuery(msg, blocks)
 		else
 		    local chat_id = msg.target_id
 		    if not u.is_allowed('config', chat_id, msg.from) then
-		    	api.answerCallbackQuery(msg.cb_id, _("You're no longer an admin"))
+		    	api.answerCallbackQuery(msg.cb_id, _("Você não é mais admin"))
 		    else
     	        local text
     	        
@@ -129,11 +129,11 @@ function plugin.onCallbackQuery(msg, blocks)
     	        
     	        local reply_markup = doKeyboard_logchannel(chat_id)
     	        if blocks[1] == 'config' then
-    	        	local logchannel_first = _([[*Select the events the will be logged in the channel*
-✅ = will be logged
-☑️ = won't be logged
+    	        	local logchannel_first = _([[*Selecione oque vai ser registrado no canal de log*
+✅ = Será registrado
+☑️ = Não será registrado
 
-Tap on a voice to get further informations]])
+Clique nas opções para ter mais informações sobre]])
     	        	api.editMessageText(msg.chat.id, msg.message_id, logchannel_first, true, reply_markup)
     	        else
     	        	api.editMarkup(msg.chat.id, msg.message_id, reply_markup)
@@ -156,60 +156,60 @@ function plugin.onTextMessage(msg, blocks)
 	    				local res, code = api.getChatMember(msg.forward_from_chat.id, msg.from.id)
 	    				if not res then
 	    					if code == 429 then
-	    						api.sendReply(msg, _('_Too many requests. Retry later_'), true)
+	    						api.sendReply(msg, _('_Muitos pedidos!. Tente mais tarde_'), true)
 	    					else
-	    						api.sendReply(msg, _('_I need to be admin in the channel_'), true)
+	    						api.sendReply(msg, _('_Eu preciso ser administrador do canal_'), true)
 	    					end
 	    			    else
 	    					if res.result.status == 'creator' then
 	    						local text
 	    						local old_log = db:hget('bot:chatlogs', msg.chat.id)
 	    						if old_log == tostring(msg.forward_from_chat.id) then
-	    							text = _('_Already using this channel_')
+	    							text = _('_Já está usando esse canal_')
 	    						else
 	    							db:hset('bot:chatlogs', msg.chat.id,  msg.forward_from_chat.id)
-	    							text = _('*Log channel added!*')
+	    							text = _('*Canal de log adicionado!*')
 	    							if old_log then
-	    								api.sendMessage(old_log, _("<i>%s</i> changed its log channel"):format(msg.chat.title:escape_html()), 'html')
+	    								api.sendMessage(old_log, _("<i>%s</i> mudou o canal de log"):format(msg.chat.title:escape_html()), 'html')
 	    							end
-	    							api.sendMessage(msg.forward_from_chat.id, _("Logs of <i>%s</i> will be posted here"):format(msg.chat.title:escape_html()), 'html')
+	    							api.sendMessage(msg.forward_from_chat.id, _("Registros de <i>%s</i> Serão postados aqui"):format(msg.chat.title:escape_html()), 'html')
 	    						end
 	    						api.sendReply(msg, text, true)
 	    					else
-	    						api.sendReply(msg, _('_Only the channel creator can pair the chat with a channel_'), true)
+	    						api.sendReply(msg, _('_Apenas o criador do canal pode sincronizar o grupo com o canal_'), true)
 	    					end
 	    				end
 	    			else
-	    				api.sendReply(msg, _('_I\'m sorry, only private channels are supported for now_'), true)
+	    				api.sendReply(msg, _('_Perdão, po enquanto apenas canais privados são suportados_'), true)
 	    			end
 	    		end
 			else
-				api.sendReply(msg, _("You have to *forward* the message from the channel"), true)
+				api.sendReply(msg, _("Você precisa *encminhar* a mensagem do canal pra cá"), true)
 			end
     	end
     	if blocks[1] == 'unsetlog' then
     		local log_channel = db:hget('bot:chatlogs', msg.chat.id)
     		if not log_channel then
-    			api.sendReply(msg, _("_This groups is not using a log channel_"), true)
+    			api.sendReply(msg, _("_Este grupo não está usando um canal de log_"), true)
     		else
     			db:hdel('bot:chatlogs', msg.chat.id)
-    			api.sendReply(msg, _("*Log channel removed*"), true)
+    			api.sendReply(msg, _("*Canal de log removido*"), true)
     		end
 		end
 		if blocks[1] == 'logchannel' then
 			local log_channel = db:hget('bot:chatlogs', msg.chat.id)
     		if not log_channel then
-    			api.sendReply(msg, _("_This groups is not using a log channel_"), true)
+    			api.sendReply(msg, _("_Este grupo não está usando um canal de log_"), true)
     		else
     			local channel_info, code = api.getChat(log_channel)
     			if not channel_info and code == 403 then
-    				api.sendReply(msg, _("_This group has a log channel saved, but I'm not a member there, so I can't post/retrieve its info_"), true)
+    				api.sendReply(msg, _("_Esse grupo tem um canal de log salvo, porém eu não sou membro dele. Por isso eu nãop consigo te dar informações_"), true)
     			else
     				local channel_identifier = log_channel
     				if channel_info and channel_info.result then
     					channel_identifier = channel_info.result.title
     				end
-    				api.sendReply(msg, _("<b>This group has a log channel</b>\nChannel: <code>%s</code>"):format(channel_identifier:escape_html()), 'html')
+    				api.sendReply(msg, _("<b>Esse grupo possui um canal de log</b>\nCanal: <code>%s</code>"):format(channel_identifier:escape_html()), 'html')
     			end
     		end
     	end
