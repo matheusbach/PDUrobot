@@ -59,7 +59,7 @@ function plugin.onTextMessage(msg, blocks)
   end
 
   if blocks[1] == '/fileid' or blocks[1] == '/fileinfo' then
-  local replied_to = u.get_media_type(msg.reply)
+    local replied_to = u.get_media_type(msg.reply)
     local file_id
     file_id = u.get_media_id(msg.reply)
     if file_id == false then
@@ -77,7 +77,7 @@ function plugin.onTextMessage(msg, blocks)
   end
 
   if blocks[1] == 'Bom dia' or blocks[1] == 'Bodia' or blocks[1] == 'Bom Dia' or blocks[1] == 'bodia' or blocks[1] == 'bom dia' then
-   local bodia = {
+    local bodia = {
     'CAADAQADowIAAoe7Lx_Tqx3y7MrcgAI', -- stiker bom dia caralho
     'CQADAQADbAADQjUZRDcJzQXatxYTAg', -- bom dia torcida jovem do flamengo
     'CAADAQAD-AIAAoe7Lx-igkIFPnnonwI', -- sticker bom dia viadoes
@@ -91,7 +91,7 @@ function plugin.onTextMessage(msg, blocks)
     'AwADBAADJ6MAApAcZAczqtG8_khsVgI', -- ^m^
     'AwADBAADu6UAAlcYZAc3Kj7VWBLa8AI', -- bom dia povo do meu brasil varonil
     'AwADBAADeqIAAp4cZAfLmxlYcBQuyAI', -- bom dia xuxuzinho
-  }
+    }
     mensagemBodia = bodia[math.random(#bodia)]
 
     local key_comando = 'chat:'..msg.chat.id..':bodia'
@@ -141,6 +141,14 @@ function plugin.onTextMessage(msg, blocks)
     api.sendMessage(msg.chat.id, 'pingado \n`' ..math.ceil(tempoFinal*1000).. ' ms`', true)
   end
 
+  if blocks[1] == '/echo' or blocks[1] == '/falar' or blocks[1] == '/repetir' then
+    if not blocks[2] then
+      api.sendReply(msg, 'Quer que eu repita oque? você não falou nada. Use: `/falar mensagem para falar`', true)
+    else
+      api.sendMessage(msg.chat.id, blocks[2], true)
+    end
+  end
+
 end
 
 plugin.triggers = {
@@ -160,6 +168,7 @@ plugin.triggers = {
     '(/enviar) (.*)$',
     '(/clique_aqui_para_acordar_o_baiano)', '(/clique_aqui_para_acordar_um_baiano)', '(/clique_aqui_para_acordar_baiano)', '(/clique_para_acordar_o_baiano)', '(/clique_para_acordar_um_baiano)', '(/clique_para_acordar_baiano)', '(/acordar_o_baiano)', '(/acordar_um_baiano)', '(/acordar_baiano)', --bodia
     '(Bom dia)', '(Bodia)', '(Bom Dia)', '(bodia)', '(bom dia)', --bodia
+    '(/falar) (.*)$', '(/repetir) (.*)$', '(/falar)$', '(/repetir)$',
   }
 }
 
