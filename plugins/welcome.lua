@@ -60,18 +60,18 @@ local function get_welcome(msg)
 	--	socket.sleep(5)			
 	--	api.deleteMessage(msg.chat.id, msg.message_id)
 		local aleatorio = {
-			'*Gratificado pela preferência*',
-			'*Fique a vontade conosco*',
-			'*Agradecemos por fazer parte de nosso grupo*',
-			'*Fique a vontade conosco*',
-			'*Ficamos felizes por esta aqui*',
-			'*Espero que goste de nosso grupo*',
-			'*E um prazer ter você aqui*',
-			'*O grupo agradece por ter entrado em nosso grupo*',
-			'*Obrigado por entrar em nosso grupo*'
+			'*Bem vindo ao recinto*',
+			'*É só curtir e passar o endereço*',
+			'*Agora que você entrou não há volta*',
+			'*Bem vindo ao grupo. Se quiser tem cerveja na geladeira*',
+			'*Corre que quem ta puto é o/a*',
+			'*Puxa a cadeira*',
+			'*Membro novo faz boquete pro bonde*',
+			'*Bem vindo e manda áudio pelado/a*',
+			'*Agora que entrou você saberá a verdade*'
 		}
 		entrada = aleatorio[math.random(#aleatorio)]
-		return _(entrada .. " [%s](%s)"):format(msg.new_chat_member.first_name:escape(), 'telegram.me/'..msg.from.username:escape())
+		return _(entrada .. ", [%s](%s)"):format(msg.new_chat_member.first_name:escape(), 'telegram.me/'..msg.from.username:escape())
 	end
 end
 
