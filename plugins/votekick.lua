@@ -146,7 +146,7 @@ local function generate_poll(msg, defendant)
 
 	local hash = string.format('chat:%d:votekick', msg.chat.id)
 	local quorum = tonumber(db:hget(hash, 'quorum') or config.chat_settings.votekick.quorum)
-	local duration = tonumber(db:hget(hash, 'duratduraçãoion') or config.chat_settings.votekick.duration)
+	local duration = tonumber(db:hget(hash, 'duration') or config.chat_settings.votekick.duration)
 
 	-- Detect if previous poll was or not and set the initiator
 	local hash = string.format('chat:%d:votekick:%d', msg.chat.id, defendant.id)
