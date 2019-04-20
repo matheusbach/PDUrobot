@@ -107,7 +107,7 @@ function plugin.onTextMessage(msg, blocks)
     end
   end
 
-  if blocks[1] == '/clique_aqui_para_acordar_o_baiano' or blocks[1] == '/clique_aqui_para_acordar_um_baiano' or blocks[1] == '/clique_aqui_para_acordar_baiano' or blocks[1] == '/clique_para_acordar_o_baiano' or blocks[1] == '/clique_para_acordar_um_baiano' or blocks[1] == '/clique_para_acordar_baiano' or blocks[1] == '/acordar_o_baiano' or blocks[1] == '/acordar_um_baiano' or blocks[1] == '/acordar_baiano' then
+  if blocks[1] == 'acordar_o_baiano' or blocks[1] == 'acordar_um_baiano' or blocks[1] == 'acordar_baiano' or blocks[1] == 'acordar_o_bayano' or blocks[1] == 'acordar_um_bayano' or blocks[1] == 'acordar_bayano' then
     local mensagemAcordar = {
       'O baiano foi acordado',
       'O 👋🏿3️⃣6️⃣5️⃣ foi acordado',
@@ -166,7 +166,7 @@ plugin.triggers = {
     '(/send) (.*)$',
     '(/ping)$',
     '(/enviar) (.*)$',
-    '(/clique_aqui_para_acordar_o_baiano)', '(/clique_aqui_para_acordar_um_baiano)', '(/clique_aqui_para_acordar_baiano)', '(/clique_para_acordar_o_baiano)', '(/clique_para_acordar_um_baiano)', '(/clique_para_acordar_baiano)', '(/acordar_o_baiano)', '(/acordar_um_baiano)', '(/acordar_baiano)', --bodia
+    '(acordar_o_baiano)', '(acordar_um_baiano)', '(acordar_baiano)', '(acordar_o_bayano)', '(acordar_um_bayano)', '(acordar_bayano)', --acordar baiano
     '(Bom dia)', '(Bodia)', '(Bom Dia)', '(bodia)', '(bom dia)', --bodia
     '(/falar) (.*)$', '(/repetir) (.*)$', '(/falar)$', '(/repetir)$',
   }
