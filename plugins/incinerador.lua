@@ -13,7 +13,7 @@ local function get_texto(bIncinerados)
 	*%s* baianos
 	Foram incinerados.
 	
-	Aproveite enquanto o incinerador está quente
+	Aproveite enquanto o [incinerador](https://t.me/joinchat/AAAAAFf8rRWSpUJNFqUPgA) está quente
 	]]):format(bIncinerados)
 end
 
@@ -28,7 +28,7 @@ local function get_botoes()
 end
 
 function plugin.onTextMessage(msg, blocks)
-	local FornalheiroKey = 'chat:'..msg.from.id..':ultimoFornalheiro'
+	local FornalheiroKey = 'chat:'..msg.chat.id..':ultimoFornalheiro'
 	local ultimoFornalheiro = db:get(FornalheiroKey)
 	if ultimoFornalheiro then
 		--local msg_id = tonumber(db:hget(hash, 'msg_id'))
@@ -51,11 +51,11 @@ function plugin.onTextMessage(msg, blocks)
 end
 
 function plugin.onCallbackQuery(msg, blocks)
-	local IncineradorKey = 'chat:'..msg.from.id..':ultimoIncinerador'
+	local IncineradorKey = 'chat:'..msg.chat.id..':ultimoIncinerador'
 	local ultimoIncinerador = db:get(IncineradorKey)
 	if ultimoIncinerador then
 		api.answerCallbackQuery(msg.cb_id, "Você já usou o incinerador hoje")
-    else
+	else
     	local uIncinerador = u.getname_final(msg.from)
 		db:setex(IncineradorKey, 72000, uIncinerador) --20 horas minimas para usar o incinerador novamente
 		local hash = string.format('incinerador:%d', msg.chat.id)
@@ -77,7 +77,10 @@ function plugin.onCallbackQuery(msg, blocks)
 		api.editMessageText(msg.chat.id, msg.message_id, texto, true, botoes) -- atualiza a mensagem
 	
 		api.answerCallbackQuery(msg.cb_id, "🔥 Parabéns! Você incinerou mais um " ..quem.. " 🔥")
-	end
+
+		api.sendMessage(-1001476177173, '[' .. msg.from.first_name .. '](https://t.me/' .. msg.from.username .. ') incinerou um *' ..quem .. '*', true, keyboard)
+		
+	--end
 end
 
 plugin.triggers = {
