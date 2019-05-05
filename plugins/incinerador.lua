@@ -80,7 +80,7 @@ function plugin.onCallbackQuery(msg, blocks)
 
 		api.sendMessage(-1001476177173, '[' .. msg.from.first_name .. '](https://t.me/' .. msg.from.username .. ') incinerou um *' ..quem .. '*', true, keyboard)
 		
-	--end
+	end
 end
 
 plugin.triggers = {
