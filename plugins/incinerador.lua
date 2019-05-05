@@ -35,7 +35,7 @@ function plugin.onTextMessage(msg, blocks)
 		api.sendReply(msg, 'Um incinerador já está aceso.', true)
     else
     	local uFornalheiro = u.getname_final(msg.from)
-		db:setex(FornalheiroKey, 432000, uFornalheiro) --12 horas mínimas entre mensagens
+		db:setex(FornalheiroKey, 43200, uFornalheiro) --12 horas mínimas entre mensagens
 	  
 		if blocks[1] == 'incinerador' then
 			local hash = string.format('incinerador:%d', msg.chat.id)
@@ -51,7 +51,7 @@ function plugin.onTextMessage(msg, blocks)
 end
 
 function plugin.onCallbackQuery(msg, blocks)
-	local IncineradorKey = 'chat:'..msg.chat.id..':ultimoIncinerador'
+	local IncineradorKey = 'chat:'..msg.from.id..':ultimoIncinerador'
 	local ultimoIncinerador = db:get(IncineradorKey)
 	if ultimoIncinerador then
 		api.answerCallbackQuery(msg.cb_id, "Você já usou o incinerador hoje")
