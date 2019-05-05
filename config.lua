@@ -70,7 +70,9 @@ return {
 		'ip',
 		'btc',
 		'ajudar',
+		'canaldobananal',
 		'fiodoalmo',
+		'incinerador',
 		'extra', --must be the last plugin in the list
 	},
 	multipurpose_plugins = {},
