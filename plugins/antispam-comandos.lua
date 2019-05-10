@@ -5,6 +5,9 @@ local u = require 'utilities'
 local plugin = {}
 
 function plugin.onTextMessage(msg, blocks)
+	
+	if msg.chat.type == 'private' then return true end
+	
 	if not u.is_allowed('texts', msg.chat.id, msg.from) then 
 		local ultimoComandoApertadoAgora = blocks[1]
 		local hash = string.format('ultimoComandoUsado:%d', msg.chat.id)
@@ -17,7 +20,7 @@ function plugin.onTextMessage(msg, blocks)
 			local ultimaVezUsado = db:get(comandoKey)
 			if ultimaVezUsado then
 				api.deleteMessage(msg.chat.id, msg.message_id) -- apaga o comando redundante
-				api.sendMessage(msg.from.id, 'você spammou um comando que já havia sido mandado nas ultimas 3 horas no grupo ' .. msg.chat.title .. ', por isso apaguei sua mensagem')
+				--api.sendMessage(msg.from.id, 'você spammou um comando que já havia sido mandado nas ultimas 3 horas no grupo ' .. msg.chat.title .. ', por isso apaguei sua mensagem')
 				return false
 			else
 	    		local uComando = msg.chat.id
