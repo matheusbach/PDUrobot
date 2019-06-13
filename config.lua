@@ -103,8 +103,8 @@ return {
 			['antico'] = 'alwd', -- anti comandos
 			['anticsujos']  = 'alwd', -- anti conteúdo sujo
 			['antiuser'] = 'alwd', -- anti usernames					
-			['warns'] = 15,
-			['action'] = 'mute'
+			['warns'] = 5,
+			['action'] = 'kick'
 		},
 		['flood'] = {
 			['MaxFlood'] = 5,

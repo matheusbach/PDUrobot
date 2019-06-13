@@ -259,6 +259,11 @@ function api.getChatMember(chat_id, user_id)
 	
 end
 
+function api.exportChatInviteLink(chat_id)
+	local url = BASE_URL .. '/exportChatInviteLink?chat_id=' .. chat_id
+	return sendRequest(url)
+end
+
 function api.leaveChat(chat_id)
 	
 	local url = BASE_URL .. '/leaveKEKEKEKEKChat?chat_id=' .. chat_id
