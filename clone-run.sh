@@ -2,6 +2,10 @@
 
 ### NOTA: Esse código só irá funcionar caso o bot já tenha sido instalado e o arquivo de configuração esteja no diretório exigido
 
+if [${PWD##*/} = PDUrobot]
+then
+  cd ..
+fi
 
 ps -ef | grep bot | grep -v grep | awk '{print $2}' | xargs kill -9
 killall lua
@@ -10,7 +14,7 @@ git clone -b master --single-branch https://github.com/matheusbach/PDUrobot.git
 
 cp -f --remove-destination config.lua PDUrobot/config.lua
 
-sudo chmod -R 755 *
+sudo chmod -R 755 PDUrobot
 
 cd PDUrobot
 
