@@ -3,10 +3,6 @@
 ps -ef | grep bot | grep -v grep | awk '{print $2}' | xargs kill -9
 killall lua
 
-./install.sh
-
-./clone-run.sh
-
 echo -e "\e[1;36mUpdating packages\e[0m"
 sudo apt-get update -y
 sudo apt-get upgrade -y
