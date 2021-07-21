@@ -4,7 +4,7 @@ sudo apt-get update -y
 
 sudo apt-get upgrade -y
 
-sudo apt-get install libreadline-dev libssl-dev lua5.2 liblua5.2-dev git make unzip redis-server curl libcurl4-gnutls-dev -y
+sudo apt-get install libreadline-dev libssl-dev lua5.2 liblua5.2-dev git make unzip redis-server curl lua-curl libcurl4-gnutls-dev -y
 
 ps -ef | grep bot | grep -v grep | awk '{print $2}' | xargs kill -9
 killall lua
