@@ -6,6 +6,10 @@ if [${PWD##*/} = PDUrobot]
 then
   cd ..
 fi
+if [${PWD##*/} = PDUrobot]
+then
+  cd ..
+fi
 
 ps -ef | grep bot | grep -v grep | awk '{print $2}' | xargs kill -9
 killall lua
