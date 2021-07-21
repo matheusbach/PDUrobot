@@ -33,7 +33,10 @@ killall lua
 
 git clone -b master --single-branch https://github.com/matheusbach/PDUrobot.git
 
-cp -f --remove-destination config.lua PDUrobot/config.lua
+FILE=config.lua
+if [ -f "$FILE" ]; then
+    cp -f --remove-destination config.lua PDUrobot/config.lua
+fi
 
 sudo chmod -R 755 PDUrobot
 
