@@ -4,7 +4,9 @@ echo -e "\e[1;36mUpdating packages\e[0m"
 sudo apt-get update -y
 
 echo -e "\e[1;36mInstalling dependencies\e[0m"
-sudo apt-get install libreadline-dev libssl-dev lua5.2 luarocks liblua5.2-dev git make unzip redis-server curl libcurl4-gnutls-dev -y
+sudo apt-get install libreadline-dev libssl-dev lua5.2 luarocks liblua5.2-dev git make unzip redis-server curl wget screen libcurl4-gnutls-dev -y
+
+git clone https://github.com/george0884/lua-curl-error && cd lua-curl-error && tar -xzvf curl.tar.gz && sudo cp curl -r /usr/include/ && cd .. && sudo rm -Rf lua-curl-error
     
 echo -e "\e[1;36mInstalling LuaRocks from sources\e[0m"
     
