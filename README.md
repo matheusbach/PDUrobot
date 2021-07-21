@@ -9,3 +9,5 @@
 ## Script de atualização:
 
 ```rm -rf PDUrobot update.sh&&wget https://raw.githubusercontent.com/matheusbach/PDUrobot/master/update.sh&&sudo chmod -R 755 *&&./update.sh```
+
+Talvez esse bot esteja rodando em [@PDUrobot](t.me/PDUrobot)
