@@ -4,12 +4,12 @@
 
 ## Instalação:
 
-```
+```bash
 sudo apt update -y
 sudo apt install git -y
 git clone https://github.com/matheusbach/PDUrobot.git
 cd PDUrobot
-./install
+sudo ./install
 ```
 
 edit ```config.lua``` file
