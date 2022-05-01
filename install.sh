@@ -38,6 +38,4 @@ if [ -f "$FILE" ]; then
     cp -f --remove-destination config.lua PDUrobot/config.lua
 fi
 
-sudo chmod -R 755 PDUrobot
-
-cd PDUrobot
+sudo chmod -R 755 .
