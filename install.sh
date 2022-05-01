@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-ps -ef | grep bot | grep -v grep | awk '{print $2}' | xargs kill -9
-killall lua
-
 echo -e "\e[1;36mUpdating packages\e[0m"
 sudo apt-get update -y
 sudo apt-get upgrade -y
@@ -27,15 +24,5 @@ rocks="luasocket luasec redis-lua lua-term serpent dkjson Lua-cURL lua-cjson lua
 for rock in $rocks; do
     sudo luarocks install $rock
 done
-
-ps -ef | grep bot | grep -v grep | awk '{print $2}' | xargs kill -9
-killall lua
-
-git clone -b master --single-branch https://github.com/matheusbach/PDUrobot.git
-
-FILE=config.lua
-if [ -f "$FILE" ]; then
-    cp -f --remove-destination config.lua PDUrobot/config.lua
-fi
 
 sudo chmod -R 755 .
