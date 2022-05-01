@@ -16,4 +16,4 @@ edit ```config.lua``` file
 
 ```./launch.sh```
 
-Talvez esse bot esteja rodando em [@PDUrobot](t.me/PDUrobot)
+Talvez esse bot esteja rodando em [@PDUrobot](https://t.me/PDUrobot)
