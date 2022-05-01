@@ -1,13 +1,19 @@
-# PDUrobot 2.0
+# PDUrobot 2.1
 
-# Sistema operacional Ubuntu 16.04
+# Sistema operacional Ubuntu 20.04
 
-## Script de instalação rápida:
+## Instalação:
 
-```rm -rf PDUrobot install.sh&&wget https://raw.githubusercontent.com/matheusbach/PDUrobot/master/install.sh&&sudo chmod -R 755 *&&./install.sh```
+```
+sudo apt update -y
+sudo apt install git -y
+git clone https://github.com/matheusbach/PDUrobot.git
+cd PDUrobot
+./install
+```
 
-## Script de atualização:
+edit ```config.lua``` file
 
-```rm -rf PDUrobot update.sh&&wget https://raw.githubusercontent.com/matheusbach/PDUrobot/master/update.sh&&sudo chmod -R 755 *&&./update.sh```
+```./launch.sh```
 
 Talvez esse bot esteja rodando em [@PDUrobot](t.me/PDUrobot)
